@@ -55,6 +55,10 @@ POST /api/tianji/run
 
 - [TianJi 详细说明](./README_TIANJI.md)
 - [系统架构文档](./docs/TIANJI_ARCHITECTURE.md)
+- [API 文档](./docs/API.md)
+- [Roadmap](./docs/ROADMAP.md)
+- [Contributing](./CONTRIBUTING.md)
+- [Changelog](./CHANGELOG.md)
 
 ## 路线图
 

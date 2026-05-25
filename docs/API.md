@@ -1,0 +1,156 @@
+# API Documentation
+
+## TianJi API
+
+Base prefix:
+
+```text
+/api/tianji
+```
+
+## Health Check
+
+```http
+GET /api/tianji/health
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "service": "TianJi",
+  "version": "0.1.0"
+}
+```
+
+## Run TianJi Simulation
+
+```http
+POST /api/tianji/run
+Content-Type: application/json
+```
+
+### Request Body
+
+```json
+{
+  "question": "我现在想做一个东方哲学增强型推演系统，未来这个项目能不能做大？",
+  "domain": "strategy",
+  "goal": "判断项目路线",
+  "event_time": "2026-05-26 02:00:00",
+  "location": "Guangzhou, China",
+  "rounds": 3,
+  "save_report": true,
+  "out_dir": "reports/tianji"
+}
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+|---|---|---:|---|
+| `question` | string | yes | The raw question or event background to simulate. |
+| `domain` | string | no | `relationship`, `business`, `content`, `personal`, `strategy`, or `unknown`. Defaults to `unknown`. |
+| `goal` | string | no | User objective. |
+| `event_time` | string | no | Event/start time. V1 stores it; V2/V3 will use it for Bazi/Qimen. |
+| `location` | string | no | Event location. V1 stores it; V3 Qimen will use it. |
+| `rounds` | integer | no | Simulation rounds. V1 local adapter defaults to `3`. |
+| `save_report` | boolean | no | Whether to save Markdown/JSON report files. Defaults to `true`. |
+| `out_dir` | string | no | Output report directory. Defaults to `reports/tianji`. |
+
+### Response
+
+```json
+{
+  "success": true,
+  "state": {
+    "report_id": "tianji_YYYYMMDD_HHMMSS",
+    "timestamp": "2026-05-26T02:00:00",
+    "query": {},
+    "reality": {},
+    "symbolic": {},
+    "simulation": {},
+    "causal": {},
+    "future": {},
+    "strategy": {},
+    "confidence": {}
+  },
+  "files": {
+    "markdown": "reports/tianji/tianji_YYYYMMDD_HHMMSS.md",
+    "json": "reports/tianji/tianji_YYYYMMDD_HHMMSS.json"
+  }
+}
+```
+
+## Core Output Sections
+
+### `reality`
+
+Parsed real-world context:
+
+- facts
+- timeline
+- people
+- known variables
+- unknown variables
+- constraints
+
+### `symbolic`
+
+Oriental symbolic state:
+
+- bagua
+- wuxing
+- iching
+- bazi placeholder
+- qimen placeholder
+
+### `simulation`
+
+Multi-agent simulation output:
+
+- agents
+- rounds
+- consensus
+- disagreements
+
+### `causal`
+
+Past reconstruction:
+
+- past turning points
+- causal chain
+- missed signals
+
+### `future`
+
+Future branching:
+
+- A 顺势发展
+- B 中途受阻
+- C 突发反转
+
+### `strategy`
+
+Decision strategy:
+
+- best action
+- forbidden actions
+- watch signals
+- change conditions
+
+### `confidence`
+
+Confidence and blind spots:
+
+- level
+- blind spots
+- principle
+
+## CLI Equivalent
+
+```bash
+cd backend
+PYTHONPATH=. python scripts/tianji_cli.py "你的问题" --domain strategy --goal "你的目标" --out reports/tianji
+```
