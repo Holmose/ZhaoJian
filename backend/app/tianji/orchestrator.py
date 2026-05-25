@@ -10,6 +10,7 @@ from .engines.qimen_engine import QimenEngine
 from .engines.qimen_precision import QimenPrecisionEngine
 from .engines.iching_engine import IChingEngine
 from .engines.bazi_precision import BaziPrecisionEngine
+from .engines.iching_precision import IChingPrecisionEngine
 
 class TianJiOrchestrator:
     def __init__(self) -> None:
@@ -19,6 +20,7 @@ class TianJiOrchestrator:
         self.qimen = QimenEngine()
         self.iching = IChingEngine()
         self.bazi_precision = BaziPrecisionEngine()
+        self.iching_precision = IChingPrecisionEngine()
         self.qimen_precision = QimenPrecisionEngine()
         self.sim = LocalSimulationEngine()
 
@@ -34,7 +36,17 @@ class TianJiOrchestrator:
         sym = self.symbolic.analyze(question, state.query.domain)
         state.symbolic.bagua = sym["bagua"]
         state.symbolic.wuxing = sym["wuxing"]
-        state.symbolic.iching = self.iching.analyze(question, state.query.domain, event_time)
+        iching_result = self.iching.analyze(question, state.query.domain, event_time)
+        state.symbolic.iching = iching_result
+        if iching_result.get("status") == "ok":
+            ip = self.iching_precision.analyze(
+                iching_result["primary_hexagram"]["name"],
+                iching_result["changing_lines"],
+                iching_result["changed_hexagram"]["name"],
+                state.query.domain,
+                question
+            )
+            iching_result["v3_precision"] = ip
         bazi = self.bazi.analyze(birth_datetime=birth_datetime, gender=gender, location=location)
         state.symbolic.bazi = bazi
         if bazi.get("status") == "ok":

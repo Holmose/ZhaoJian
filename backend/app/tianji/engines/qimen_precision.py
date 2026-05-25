@@ -1,116 +1,105 @@
+"""Qimen Precision Engine v2: precise value-fu/shi, heaven/earth plates, horse/empty."""
 from __future__ import annotations
+import json
+from pathlib import Path
 
-STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
-BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
-STEM_ELE = {"甲": "木", "乙": "木", "丙": "火", "丁": "火", "戊": "土",
-            "己": "土", "庚": "金", "辛": "金", "壬": "水", "癸": "水"}
-BRANCH_ELE = {"子": "水", "丑": "土", "寅": "木", "卯": "木", "辰": "土",
-              "巳": "火", "午": "火", "未": "土", "申": "金", "酉": "金",
-              "戌": "土", "亥": "水"}
-BRANCH_YINYANG = {"子": "阳", "丑": "阴", "寅": "阳", "卯": "阴",
-                  "辰": "阳", "巳": "阴", "午": "阳", "未": "阴",
-                  "申": "阳", "酉": "阴", "戌": "阳", "亥": "阴"}
+TIANGAN = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+TG_IDX = {k:i for i,k in enumerate(TIANGAN)}
+DIZHI = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+DZ_IDX = {k:i for i,k in enumerate(DIZHI)}
 
-# 奇门九宫顺序（排盘飞布用）
-PALACE_POSITIONS = [
-    ("坎一宫", 1), ("坤二宫", 2), ("震三宫", 3), ("巽四宫", 4),
-    ("中五宫", 5), ("乾六宫", 6), ("兑七宫", 7), ("艮八宫", 8), ("离九宫", 9)
-]
-# 八门顺序（值使起）
-DOOR_ORDER = ["休", "生", "伤", "杜", "景", "死", "惊", "开"]
-# 九星顺序（值符起）
-STAR_ORDER = ["蓬", "任", "冲", "辅", "英", "芮", "柱", "心", "禽"]
+YANG_JU = {
+    "冬至":1,"小寒":1,"大寒":1,"立春":8,"雨水":8,"惊蛰":8,
+    "春分":3,"清明":3,"谷雨":3,"立夏":4,"小满":4,"芒种":4,
+    "夏至":9,"小暑":9,"大暑":9,"立秋":2,"处暑":2,"白露":2,
+    "秋分":7,"寒露":7,"霜降":7,"立冬":6,"小雪":6,"大雪":6
+}
+YIN_JU = {k:(v%3+1) for k,v in YANG_JU.items()}
 
+ST_2026 = {"小寒":"01-05","大寒":"01-20","立春":"02-04","雨水":"02-18","惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20","立夏":"05-05","小满":"05-21","芒种":"06-06","夏至":"06-21","小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23","白露":"09-07","秋分":"09-23","寒露":"10-08","霜降":"10-23","立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-21"}
+ST_2025 = {"小寒":"01-05","大寒":"01-20","立春":"02-03","雨水":"02-18","惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20","立夏":"05-05","小满":"05-21","芒种":"06-05","夏至":"06-21","小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23","白露":"09-07","秋分":"09-23","寒露":"10-08","霜降":"10-23","立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-21"}
+ST_2027 = {"小寒":"01-05","大寒":"01-20","立春":"02-04","雨水":"02-18","惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20","立夏":"05-05","小满":"05-21","芒种":"06-05","夏至":"06-21","小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23","白露":"09-08","秋分":"09-23","寒露":"10-08","霜降":"10-23","立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-22"}
+
+def _find_solar_term(dt):
+    from datetime import datetime
+    yr = dt.year
+    terms = ST_2026 if yr==2026 else ST_2027 if yr==2027 else ST_2025
+    prev = None
+    for n,m in sorted(terms.items(), key=lambda x:x[1]):
+        md = datetime.strptime(f"{yr}-{m}","%Y-%m-%d")
+        if md<=dt: prev=(n,md)
+        else: break
+    return prev[0] if prev else "冬至"
+
+def _calc_yin_yang(dt):
+    t=_find_solar_term(dt)
+    return "阳遁" if t in ["冬至","小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种"] else "阴遁"
+
+def _build_precise_board(ju, dun):
+    PALACE=["坎一宫","坤二宫","震三宫","巽四宫","中五宫","乾六宫","兑七宫","艮八宫","离九宫"]
+    STEM=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+    BRANCH=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+    ju_m=(ju-1)%9+1
+    board={}
+    for i,p in enumerate(PALACE):
+        n=i+1
+        s_idx=(ju_m+n-1)%10 if dun=="阳遁" else (10-(ju_m+n-1)%10)%10
+        board[p]={"stem":STEM[s_idx],"branch":BRANCH[n%12],"board_pos":n}
+    return board
+
+def _vf_via_stem(board, hour_stem):
+    for p,d in board.items():
+        if d["stem"]==hour_stem: return p
+    return "中五宫"
+
+def _vs_via_branch(board, hour_branch):
+    PALACE=["坎一宫","坤二宫","震三宫","巽四宫","中五宫","乾六宫","兑七宫","艮八宫","离九宫"]
+    idx=DZ_IDX.get(hour_branch,0)%9
+    return PALACE[idx]
+
+def _horse(branch):
+    m={"亥":"申","子":"申","寅":"亥","午":"亥","卯":"酉","未":"丑"}
+    return m.get(branch,"无马星")
+
+def _empty(branch):
+    m={"子":["亥","子"],"丑":["亥","子"],"寅":["戌","亥"],"卯":["戌","亥"],
+       "辰":["酉","戌"],"巳":["酉","戌"],"午":["未","申"],"未":["未","申"],
+       "申":["午","未"],"酉":["午","未"],"戌":["巳","午"],"亥":["巳","午"]}
+    return m.get(branch,[])
+
+def _earth_plate():
+    PALACE=["坎一宫","坤二宫","震三宫","巽四宫","中五宫","乾六宫","兑七宫","艮八宫","离九宫"]
+    EP=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+    return {p:EP[i%10] for i,p in enumerate(PALACE)}
 
 class QimenPrecisionEngine:
-    """V3 Qimen precision engine.
-
-    Computes: value-fu (值符) / value-shi (值使) palace position,
-    heaven-plate / earth-plate stem/branch for each palace,
-    empty palace detection, horse star position.
-    """
-
-    def analyze(self, bureau: dict, board: dict, domain: str, question: str) -> dict:
-        dun = bureau.get("dun", "阳遁")
-        ju = bureau.get("ju_number", 4)
-        stem_branch = bureau.get("stem_branch_hour", "甲戌")
-        hour_stem = stem_branch[0]
-        hour_branch = stem_branch[1] if len(stem_branch) >= 2 else "戌"
-
-        # 值符宫 = 时干所在宫
-        val_fu_palace = self._stem_to_palace(hour_stem, board)
-        # 值使宫 = 八门顺排到时支位置
-        val_shi_palace = self._branch_to_palace(hour_branch, board)
-
-        # 天盘干：值符在本宫，其余按洛书顺序飞布
-        heaven_plate = self._heaven_plate(val_fu_palace, board)
-        # 地盘干：本宫地盘固定
-        earth_plate = self._earth_plate()
-        # 马星：寅申亥巳
-        horse_palace = self._horse_star(hour_branch, board)
-        # 空亡宫（时干不在的宫）
-        empty_palaces = self._empty_palaces(hour_stem, board)
-
+    def analyze(self, bureau, board, domain, question):
+        dun=bureau["dun"]; ju=bureau["ju_number"]
+        sb=bureau.get("stem_branch_hour","甲子")
+        hs=sb[0]; hb=sb[1] if len(sb)>1 else "子"
+        pboard=_build_precise_board(ju,dun)
+        vp=_vf_via_stem(pboard,hs)
+        vs=_vs_via_branch(pboard,hb)
+        hp=_horse(hb); ep=_empty(hb)
+        domain_hint={"strategy":"值符主战略布局，值使主执行落地",
+                     "relationship":"值符主主动方，值使主被动方",
+                     "business":"值符主商机，值使主风险",
+                     "personal":"值符主内因，值使主外应",
+                     "content":"值符主内容，值使主传播","unknown":"综合判断"}
+        agent = f"{vp}值符主战略，{vs}值使主落地；{domain_hint.get(domain,'综合判断')}；{hp}；空亡{ep[:2] if ep else '无'}"
+        # 合并board中的stem/branch到主结果
+        combined_board={}
+        for p,d in board.items():
+            pb=pboard.get(p,{})
+            combined_board[p]={**d,"stem":pb.get("stem",""),"branch":pb.get("branch","")}
         return {
-            "value_fu": {"palace": val_fu_palace, "note": "时干所在宫"},
-            "value_shi": {"palace": val_shi_palace, "note": "时支对应宫"},
-            "heaven_plate": heaven_plate,
-            "earth_plate": earth_plate,
-            "horse_star": horse_palace,
-            "empty_palaces": empty_palaces,
-            "agent_hint": self._agent_hint(val_fu_palace, val_shi_palace, domain)
+            "value_fu":{"palace":vp,"note":f"时干{hs}所在宫"},
+            "value_shi":{"palace":vs,"note":f"时支{hb}对应宫"},
+            "heaven_plate":{p:d["stem"] for p,d in pboard.items()},
+            "earth_plate":_earth_plate(),
+            "horse_star":hp,
+            "empty_palaces":ep,
+            "board_with_stems":combined_board,
+            "agent_hint":agent,
+            "v4_needed":["值符值使逐宫飞布","八门飞宫","九星飞宫","逐字爻辞"]
         }
-
-    def _stem_to_palace(self, stem: str, board: dict) -> str:
-        for name, data in board.items():
-            if data.get("stem") == stem:
-                return name
-        # fallback: 壬甲落中宫
-        return "中五宫"
-
-    def _branch_to_palace(self, branch: str, board: dict) -> str:
-        for name, data in board.items():
-            if data.get("branch") == branch:
-                return name
-        return "中五宫"
-
-    def _heaven_plate(self, val_fu_palace: str, board: dict) -> dict:
-        result = {}
-        pos_order = ["坎一宫", "坤二宫", "震三宫", "巽四宫", "中五宫", "乾六宫", "兑七宫", "艮八宫", "离九宫"]
-        val_idx = next((i for i, p in enumerate(pos_order) if p == val_fu_palace), 4)
-        val_stem = board.get(val_fu_palace, {}).get("stem", "甲")
-        val_stem_idx = STEMS.index(val_stem) if val_stem in STEMS else 0
-        for i, pal in enumerate(pos_order):
-            stem_idx = (val_stem_idx + i - val_idx) % 10
-            result[pal] = STEMS[stem_idx]
-        return result
-
-    def _earth_plate(self) -> dict:
-        return {
-            "坎一宫": "子", "坤二宫": "未", "震三宫": "卯", "巽四宫": "辰",
-            "中五宫": "中", "乾六宫": "戌", "兑七宫": "酉", "艮八宫": "丑", "离九宫": "午"
-        }
-
-    def _horse_star(self, hour_branch: str, board: dict) -> str:
-        if hour_branch not in ["寅", "申", "亥", "巳"]:
-            return "无马星"
-        horse_map = {"寅": "申", "申": "寅", "亥": "巳", "巳": "亥"}
-        target_branch = horse_map.get(hour_branch, "")
-        for name, data in board.items():
-            if data.get("branch") == target_branch:
-                return name
-        return "无马星"
-
-    def _empty_palaces(self, hour_stem: str, board: dict) -> list[str]:
-        used_stems = {data.get("stem", "") for data in board.values() if data.get("stem")}
-        missing = [stem for stem in STEMS if stem not in used_stems]
-        return missing
-
-    def _agent_hint(self, val_fu: str, val_shi: str, domain: str) -> str:
-        hints = {
-            "relationship": f"值符{val_fu}、值使{val_shi}，主客关系清晰，适合关系推进",
-            "business": f"值符{val_fu}主资源，值使{val_shi}主执行，适合商业决策",
-            "content": f"值符{val_fu}主声量，值使{val_shi}主节奏，适合内容发布",
-            "strategy": f"值符{val_fu}主战略，值使{val_shi}主落地，适合系统布局",
-        }
-        return hints.get(domain, f"值符{val_fu}、值使{val_shi}")

@@ -25,6 +25,16 @@ class TianJiReportGenerator:
         lines.append(f"  - 趋势：{iching['transition']}")
         lines.append(f"  - 阶段风险：{'；'.join(iching['stage_warning'])}")
         lines.append(f"  - 行动提示：{iching['action_hint']}")
+        if iching.get('v3_precision'):
+            ip = iching['v3_precision']
+            lines.append(f"  - 错卦：{ip['错卦_cuo']['name']}（{ip['错卦_cuo']['strategy']}）")
+            lines.append(f"  - 互卦：{ip['互卦_nuclear']['name']}（{ip['互卦_nuclear']['trend']}）")
+            if ip.get('liu_qin'):
+                lq = [f"{l['position']}{l['relation']}" for l in ip['liu_qin']]
+                lines.append(f"  - 六亲：{' '.join(lq)}")
+            if ip.get('changing_line_detail'):
+                chg = [f"{l['position']}{l['label']}" for l in ip['changing_line_detail'] if l.get('change')]
+                if chg: lines.append(f"  - 动爻：{' '.join(chg)}")
         if s['bazi'].get('status') == 'ok':
             bazi = s['bazi']
             lines.append(f"- 四柱：年柱{bazi['pillars']['year']}、月柱{bazi['pillars']['month']}、日柱{bazi['pillars']['day']}、时柱{bazi['pillars']['hour']}")
