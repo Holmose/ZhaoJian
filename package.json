@@ -10,6 +10,8 @@
     "backend": "cd backend && uv run python run.py",
     "frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build",
+    "test": "cd backend && PYTHONPATH=. python -m pytest ../tests",
+    "samples": "python3 scripts/generate_sample_reports.py",
     "tianji": "cd backend && PYTHONPATH=. python scripts/tianji_cli.py"
   },
   "devDependencies": {

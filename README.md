@@ -73,6 +73,8 @@ POST /api/tianji/run
 - [系统架构文档](./docs/TIANJI_ARCHITECTURE.md)
 - [API 文档](./docs/API.md)
 - [Roadmap](./docs/ROADMAP.md)
+- [Examples](./examples/README.md)
+- [Sample Reports](./sample_reports/README.md)
 - [Contributing](./CONTRIBUTING.md)
 - [Changelog](./CHANGELOG.md)
 

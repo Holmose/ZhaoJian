@@ -164,7 +164,32 @@ backend/app/tianji/data/iching_64_hexagrams.json
 - No manual coin/yarrow input yet.
 - Semantic selection should be replaced or supplemented by explicit divination modes in later versions.
 
-## V5: Full Hermes / MiroFish Integration
+## V5: Examples and Test Suite
+
+Status: initial implementation completed.
+
+### Goals
+
+Make TianJi easy to verify, demonstrate, and maintain.
+
+### Implemented modules
+
+```text
+examples/
+sample_reports/
+scripts/generate_sample_reports.py
+tests/
+```
+
+### Current capabilities
+
+- Example JSON inputs for strategy, personal path, and business decisions.
+- Generated Markdown/JSON sample reports.
+- Unit tests for IChing, Bazi, Qimen, and full Orchestrator chain.
+- `npm run test` for backend pytest suite.
+- `npm run samples` for regenerating sample reports.
+
+## V6: Full Hermes / MiroFish Integration
 
 ### Goals
 

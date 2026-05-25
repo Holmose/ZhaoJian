@@ -1,0 +1,10 @@
+{
+  "question": "这个客户现在对方案感兴趣但迟迟不付款，后面成交概率如何？现在应该推进、等待还是回收？",
+  "domain": "business",
+  "goal": "判断客户成交路径和当前动作",
+  "event_time": "2026-05-26 15:30",
+  "location": "Guangzhou",
+  "rounds": 3,
+  "save_report": true,
+  "out_dir": "sample_reports"
+}

@@ -1,0 +1,338 @@
+{
+  "report_id": "tianji_20260526_030920",
+  "timestamp": "2026-05-26T03:09:20",
+  "query": {
+    "question": "这个客户现在对方案感兴趣但迟迟不付款，后面成交概率如何？现在应该推进、等待还是回收？",
+    "domain": "business",
+    "goal": "判断客户成交路径和当前动作",
+    "event_time": "2026-05-26 15:30",
+    "location": "Guangzhou"
+  },
+  "reality": {
+    "facts": [
+      "这个客户现在对方案感兴趣但迟迟不付款，后面成交概率如何",
+      "现在应该推进、等待还是回收"
+    ],
+    "timeline": [
+      "这个客户现在对方案感兴趣但迟迟不付款，后面成交概率如何",
+      "现在应该推进、等待还是回收"
+    ],
+    "people": [
+      "客户"
+    ],
+    "known_variables": [
+      "利益/资源变量"
+    ],
+    "unknown_variables": [
+      "结果走向仍未验证，需要用多路径而非单结论处理",
+      "缺少明确时间节点，奇门/周期判断仅能做语义级参考"
+    ],
+    "constraints": [
+      "现实证据优先",
+      "象数只作建模语言",
+      "输出必须保留概率分支和盲区"
+    ]
+  },
+  "symbolic": {
+    "bagua": {
+      "main": "兑",
+      "element": "金",
+      "keywords": [
+        "愉悦",
+        "社交",
+        "口舌",
+        "交易",
+        "说服"
+      ],
+      "action_hint": "适合轻沟通和交换价值",
+      "scores": {
+        "兑": 6,
+        "乾": 3,
+        "坤": 1,
+        "震": 1,
+        "巽": 1,
+        "坎": 1,
+        "离": 1,
+        "艮": 1
+      }
+    },
+    "wuxing": {
+      "main": "金",
+      "keywords": [
+        "规则",
+        "切割",
+        "竞争",
+        "决断"
+      ],
+      "risk": "过硬过冷，关系断裂"
+    },
+    "iching": {
+      "status": "ok",
+      "primary_hexagram": {
+        "number": 5,
+        "gua": "需",
+        "trend": "当前趋势围绕等待展开，关键在需求与时机的平衡",
+        "strategy": "围绕等待小步验证",
+        "risk": "忽视需求导致失衡",
+        "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。",
+        "name": "水天需"
+      },
+      "changing_lines": [
+        3
+      ],
+      "changed_hexagram": {
+        "number": 8,
+        "gua": "比",
+        "trend": "当前趋势围绕连接展开，关键在亲近与选择的平衡",
+        "strategy": "围绕连接小步验证",
+        "risk": "忽视亲近导致失衡",
+        "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。",
+        "name": "水地比"
+      },
+      "transition": "本卦水天需：当前趋势围绕等待展开，关键在需求与时机的平衡；变爻[3]后趋向水地比：当前趋势围绕连接展开，关键在亲近与选择的平衡。",
+      "stage_warning": [
+        "变化发生在中段，重点看执行过程与外部反馈",
+        "本卦风险：忽视需求导致失衡",
+        "变卦风险：忽视亲近导致失衡"
+      ],
+      "action_hint": "先按本卦策略：围绕等待小步验证；同时预留变卦方向：围绕连接小步验证。",
+      "principle": "易经层用于趋势演化建模，必须受现实证据和多路径推演约束"
+    },
+    "bazi": {
+      "status": "missing_birth_datetime",
+      "role": "人物长期结构模型，需要 birth_datetime 才能计算",
+      "required_format": "YYYY-MM-DD HH:MM"
+    },
+    "qimen": {
+      "status": "ok",
+      "note": "V3 uses semantic Qimen layout, not yet full traditional solar-term Qimen calculation.",
+      "event_time": "2026-05-26 15:30",
+      "location": "Guangzhou",
+      "bureau": {
+        "dun": "阳遁",
+        "ju": 2,
+        "label": "阳遁2局"
+      },
+      "main_palace": {
+        "name": "中五宫",
+        "element": "土",
+        "direction": "中",
+        "keywords": [
+          "核心",
+          "枢纽",
+          "阻滞",
+          "承压"
+        ]
+      },
+      "door": {
+        "name": "死门",
+        "quality": "凶",
+        "keywords": [
+          "停滞",
+          "结束",
+          "沉没",
+          "僵局"
+        ],
+        "action_hint": "适合止损复盘，不宜强行推进"
+      },
+      "star": {
+        "name": "天辅",
+        "keywords": [
+          "辅助",
+          "学习",
+          "文书",
+          "贵人"
+        ],
+        "risk": "依赖外部支持"
+      },
+      "god": {
+        "name": "六合",
+        "keywords": [
+          "合作",
+          "关系",
+          "撮合",
+          "连接"
+        ],
+        "hint": "适合协商与关系整合"
+      },
+      "host_guest": {
+        "posture": "被动方/环境约束较强",
+        "relation": "适合协商整合",
+        "domain": "business"
+      },
+      "situation_signal": [
+        "主宫中五宫：核心、枢纽、阻滞、承压",
+        "主门死门：停滞、结束、沉没、僵局",
+        "主星天辅：辅助、学习、文书、贵人",
+        "主神六合：合作、关系、撮合、连接"
+      ],
+      "timing_hint": "窗口不稳，先控风险或等待新信号",
+      "risk_hint": [
+        "适合止损复盘，不宜强行推进",
+        "依赖外部支持",
+        "适合协商与关系整合"
+      ],
+      "action_hint": "适合止损复盘，不宜强行推进；适合协商与关系整合",
+      "v4_needed": [
+        "solar_terms",
+        "yin_yang_dun",
+        "ju_number",
+        "heaven_earth_plate",
+        "useful_god_selection"
+      ]
+    }
+  },
+  "simulation": {
+    "agents": [
+      {
+        "name": "Reality Agent",
+        "role": "只看事实与证据"
+      },
+      {
+        "name": "Causal Agent",
+        "role": "寻找过去因果链"
+      },
+      {
+        "name": "Risk Agent",
+        "role": "专门放大风险与黑天鹅"
+      },
+      {
+        "name": "Strategy Agent",
+        "role": "把结论落到行动"
+      },
+      {
+        "name": "Bazi Agent",
+        "role": "人物长期结构，V2增强"
+      },
+      {
+        "name": "Qimen Agent",
+        "role": "事件时空局势，V3增强"
+      },
+      {
+        "name": "IChing Agent",
+        "role": "趋势演化与阶段"
+      },
+      {
+        "name": "Wuxing Agent",
+        "role": "动力平衡与生克"
+      },
+      {
+        "name": "Skeptic Agent",
+        "role": "反玄学校验，防止过度解释"
+      },
+      {
+        "name": "Synthesizer Agent",
+        "role": "收敛共识"
+      }
+    ],
+    "rounds": [
+      {
+        "round": 1,
+        "theme": "事实校验",
+        "summary": "现实信息仍是主约束；象数标签只辅助组织变量。"
+      },
+      {
+        "round": 2,
+        "theme": "象数争论",
+        "summary": "主象为兑，提示：适合轻沟通和交换价值。易经趋势为水天需转水地比，提示：先按本卦策略：围绕等待小步验证；同时预留变卦方向：围绕连接小步验证。。奇门显示阳遁2局，死门主事，时机提示：窗口不稳，先控风险或等待新信号。反方提醒：不能把象意当必然结果。"
+      },
+      {
+        "round": 3,
+        "theme": "策略收敛",
+        "summary": "采用三路径输出：顺势路径、受阻路径、反转路径，并设置观察信号。"
+      }
+    ],
+    "consensus": [
+      "不要输出绝对预言，要输出条件概率与触发条件",
+      "过去反推必须绑定事实节点，不能凭空补剧情",
+      "当前主象兑可以作为局势标签，但最终动作仍看现实反馈",
+      "先按本卦策略：围绕等待小步验证；同时预留变卦方向：围绕连接小步验证。",
+      "适合止损复盘，不宜强行推进；适合协商与关系整合"
+    ],
+    "disagreements": [
+      "象数派倾向强调趋势感，现实派要求补充更多证据",
+      "风险派认为需要保留黑天鹅路径，策略派只允许一个当前主动作"
+    ]
+  },
+  "causal": {
+    "past_turning_points": [
+      "这个客户现在对方案感兴趣但迟迟不付款，后面成交概率如何",
+      "现在应该推进、等待还是回收"
+    ],
+    "causal_chain": [
+      "输入事实 → 象数状态标签 → 多Agent争论 → 条件概率路径"
+    ],
+    "missed_signals": [
+      "缺少对方/环境连续反馈时，不判断为必然趋势"
+    ]
+  },
+  "future": {
+    "branches": [
+      {
+        "name": "A 顺势发展",
+        "probability": 0.45,
+        "trigger_conditions": [
+          "现实反馈持续增强",
+          "关键风险未触发",
+          "适合轻沟通和交换价值"
+        ],
+        "risks": [
+          "过早下定论"
+        ],
+        "outcome": "局势按当前方向推进"
+      },
+      {
+        "name": "B 中途受阻",
+        "probability": 0.35,
+        "trigger_conditions": [
+          "信息不足继续扩大",
+          "外部变量介入",
+          "执行动作过急或过慢"
+        ],
+        "risks": [
+          "误把短期信号当长期趋势"
+        ],
+        "outcome": "进入停滞、冷却或反复"
+      },
+      {
+        "name": "C 突发反转",
+        "probability": 0.2,
+        "trigger_conditions": [
+          "隐藏变量暴露",
+          "时间窗口变化",
+          "关键人物态度突变"
+        ],
+        "risks": [
+          "黑天鹅不可控"
+        ],
+        "outcome": "出现和主路径相反的结果"
+      }
+    ]
+  },
+  "strategy": {
+    "best_action": "适合轻沟通和交换价值",
+    "forbidden_actions": [
+      "把推演当绝对预言",
+      "在证据不足时做高风险承诺",
+      "跳过现实反馈只看象数"
+    ],
+    "watch_signals": [
+      "对方/市场/环境是否持续反馈",
+      "关键时间节点是否出现新变量",
+      "风险信号是否从隐性变显性"
+    ],
+    "change_conditions": [
+      "新增事实推翻当前假设",
+      "主路径连续两次不成立",
+      "黑天鹅变量出现"
+    ]
+  },
+  "confidence": {
+    "level": "中低",
+    "blind_spots": [
+      "结果走向仍未验证，需要用多路径而非单结论处理",
+      "缺少明确时间节点，奇门/周期判断仅能做语义级参考"
+    ],
+    "principle": "现实证据 > 多Agent共识 > 象数解释"
+  }
+}

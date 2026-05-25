@@ -2,6 +2,17 @@
 
 All notable changes to TianJi will be documented in this file.
 
+## [0.5.0] - 2026-05-26
+
+### Added
+
+- Added V5 examples and test suite.
+- Added `examples/` with strategy, personal path, and business decision inputs.
+- Added `sample_reports/` with generated Markdown and JSON reports.
+- Added `scripts/generate_sample_reports.py`.
+- Added tests for IChing, Bazi, Qimen, and full TianJi Orchestrator chain.
+- Added npm scripts: `test` and `samples`.
+
 ## [0.4.0] - 2026-05-26
 
 ### Added

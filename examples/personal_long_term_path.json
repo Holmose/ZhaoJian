@@ -1,0 +1,12 @@
+{
+  "question": "推演一下这个人未来三年适不适合做长期战略项目，主要风险和突破口在哪里？",
+  "domain": "personal",
+  "goal": "判断长期路径与个人结构适配度",
+  "event_time": "2026-05-26 10:00",
+  "location": "Guangzhou",
+  "birth_datetime": "1998-06-15 14:30",
+  "gender": "male",
+  "rounds": 3,
+  "save_report": true,
+  "out_dir": "sample_reports"
+}

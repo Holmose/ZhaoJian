@@ -1,0 +1,12 @@
+{
+  "question": "这个天机推演系统还没完全成熟，未来适不适合继续扩张和公开发布？",
+  "domain": "strategy",
+  "goal": "判断项目发布与扩张路线",
+  "event_time": "2026-05-26 22:10",
+  "location": "Guangzhou",
+  "birth_datetime": "1998-06-15 14:30",
+  "gender": "male",
+  "rounds": 3,
+  "save_report": true,
+  "out_dir": "sample_reports"
+}

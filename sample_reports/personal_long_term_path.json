@@ -1,0 +1,381 @@
+{
+  "report_id": "tianji_20260526_030920",
+  "timestamp": "2026-05-26T03:09:20",
+  "query": {
+    "question": "推演一下这个人未来三年适不适合做长期战略项目，主要风险和突破口在哪里？",
+    "domain": "personal",
+    "goal": "判断长期路径与个人结构适配度",
+    "event_time": "2026-05-26 10:00",
+    "location": "Guangzhou"
+  },
+  "reality": {
+    "facts": [
+      "推演一下这个人未来三年适不适合做长期战略项目，主要风险和突破口在哪里"
+    ],
+    "timeline": [],
+    "people": [],
+    "known_variables": [
+      "风险变量"
+    ],
+    "unknown_variables": [
+      "结果走向仍未验证，需要用多路径而非单结论处理",
+      "缺少明确时间节点，奇门/周期判断仅能做语义级参考"
+    ],
+    "constraints": [
+      "现实证据优先",
+      "象数只作建模语言",
+      "输出必须保留概率分支和盲区"
+    ]
+  },
+  "symbolic": {
+    "bagua": {
+      "main": "乾",
+      "element": "金",
+      "keywords": [
+        "主动",
+        "权力",
+        "目标",
+        "资源",
+        "父性"
+      ],
+      "action_hint": "可主动定方向，但避免压迫",
+      "scores": {
+        "乾": 7,
+        "坤": 4,
+        "坎": 4,
+        "震": 1,
+        "巽": 1,
+        "离": 1,
+        "艮": 1,
+        "兑": 1
+      }
+    },
+    "wuxing": {
+      "main": "金",
+      "keywords": [
+        "规则",
+        "切割",
+        "竞争",
+        "决断"
+      ],
+      "risk": "过硬过冷，关系断裂"
+    },
+    "iching": {
+      "status": "ok",
+      "primary_hexagram": {
+        "number": 32,
+        "gua": "恒",
+        "trend": "当前趋势围绕持续展开，关键在稳定与长期的平衡",
+        "strategy": "围绕持续小步验证",
+        "risk": "忽视稳定导致失衡",
+        "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。",
+        "name": "雷风恒"
+      },
+      "changing_lines": [
+        6
+      ],
+      "changed_hexagram": {
+        "number": 38,
+        "gua": "睽",
+        "trend": "当前趋势围绕分歧展开，关键在背离与视角不同的平衡",
+        "strategy": "围绕分歧小步验证",
+        "risk": "忽视背离导致失衡",
+        "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。",
+        "name": "火泽睽"
+      },
+      "transition": "本卦雷风恒：当前趋势围绕持续展开，关键在稳定与长期的平衡；变爻[6]后趋向火泽睽：当前趋势围绕分歧展开，关键在背离与视角不同的平衡。",
+      "stage_warning": [
+        "变化发生在后段，注意结果收口、名实匹配和过度消耗",
+        "本卦风险：忽视稳定导致失衡",
+        "变卦风险：忽视背离导致失衡"
+      ],
+      "action_hint": "先按本卦策略：围绕持续小步验证；同时预留变卦方向：围绕分歧小步验证。",
+      "principle": "易经层用于趋势演化建模，必须受现实证据和多路径推演约束"
+    },
+    "bazi": {
+      "status": "ok",
+      "note": "V2 uses approximate solar-calendar pillars; month pillar is not yet solar-term corrected.",
+      "birth_datetime": "1998-06-15 14:30",
+      "gender": "male",
+      "location": "Guangzhou",
+      "pillars": {
+        "year": "戊寅",
+        "month": "己午",
+        "day": "癸卯",
+        "hour": "己未"
+      },
+      "day_master": {
+        "stem": "癸",
+        "element": "水",
+        "yin_yang": "阴"
+      },
+      "ten_gods": {
+        "year": "正官",
+        "month": "七杀",
+        "hour": "七杀"
+      },
+      "five_element_balance": {
+        "木": 0.268,
+        "火": 0.171,
+        "土": 0.463,
+        "金": 0.0,
+        "水": 0.098
+      },
+      "dominant_elements": [
+        "土",
+        "木"
+      ],
+      "personality_bias": [
+        "重信息与流动，擅长观察变化，但要防犹疑",
+        "对规则、压力或竞争环境敏感"
+      ],
+      "risk_pattern": [
+        "土偏旺时容易路径依赖，金偏弱处是补课方向",
+        "压力驱动强，但高压下容易走极端动作"
+      ],
+      "agent_parameters": {
+        "decision_style": "重信息与流动，擅长观察变化，但要防犹疑",
+        "resource_sensitivity": false,
+        "rule_pressure_sensitivity": true,
+        "expression_drive": false,
+        "learning_security_need": false
+      },
+      "v3_needed": [
+        "solar_terms",
+        "luck_cycles",
+        "strength_analysis",
+        "useful_god"
+      ]
+    },
+    "qimen": {
+      "status": "ok",
+      "note": "V3 uses semantic Qimen layout, not yet full traditional solar-term Qimen calculation.",
+      "event_time": "2026-05-26 10:00",
+      "location": "Guangzhou",
+      "bureau": {
+        "dun": "阳遁",
+        "ju": 6,
+        "label": "阳遁6局"
+      },
+      "main_palace": {
+        "name": "艮八宫",
+        "element": "土",
+        "direction": "东北",
+        "keywords": [
+          "停止",
+          "边界",
+          "积累",
+          "门槛"
+        ]
+      },
+      "door": {
+        "name": "惊门",
+        "quality": "凶平",
+        "keywords": [
+          "惊动",
+          "口舌",
+          "波动",
+          "消息"
+        ],
+        "action_hint": "适合制造提醒或曝光风险，忌过度刺激"
+      },
+      "star": {
+        "name": "天柱",
+        "keywords": [
+          "规则",
+          "口舌",
+          "阻力",
+          "压力"
+        ],
+        "risk": "制度或沟通压力"
+      },
+      "god": {
+        "name": "腾蛇",
+        "keywords": [
+          "虚惊",
+          "缠绕",
+          "想象",
+          "不实"
+        ],
+        "hint": "防误判、防内耗、防信息失真"
+      },
+      "host_guest": {
+        "posture": "被动方/环境约束较强",
+        "relation": "需先处理权力、风险或信息问题",
+        "domain": "personal"
+      },
+      "situation_signal": [
+        "主宫艮八宫：停止、边界、积累、门槛",
+        "主门惊门：惊动、口舌、波动、消息",
+        "主星天柱：规则、口舌、阻力、压力",
+        "主神腾蛇：虚惊、缠绕、想象、不实"
+      ],
+      "timing_hint": "窗口不稳，先控风险或等待新信号",
+      "risk_hint": [
+        "适合制造提醒或曝光风险，忌过度刺激",
+        "制度或沟通压力",
+        "防误判、防内耗、防信息失真"
+      ],
+      "action_hint": "适合制造提醒或曝光风险，忌过度刺激；防误判、防内耗、防信息失真",
+      "v4_needed": [
+        "solar_terms",
+        "yin_yang_dun",
+        "ju_number",
+        "heaven_earth_plate",
+        "useful_god_selection"
+      ]
+    }
+  },
+  "simulation": {
+    "agents": [
+      {
+        "name": "Reality Agent",
+        "role": "只看事实与证据"
+      },
+      {
+        "name": "Causal Agent",
+        "role": "寻找过去因果链"
+      },
+      {
+        "name": "Risk Agent",
+        "role": "专门放大风险与黑天鹅"
+      },
+      {
+        "name": "Strategy Agent",
+        "role": "把结论落到行动"
+      },
+      {
+        "name": "Bazi Agent",
+        "role": "人物长期结构，V2增强"
+      },
+      {
+        "name": "Qimen Agent",
+        "role": "事件时空局势，V3增强"
+      },
+      {
+        "name": "IChing Agent",
+        "role": "趋势演化与阶段"
+      },
+      {
+        "name": "Wuxing Agent",
+        "role": "动力平衡与生克"
+      },
+      {
+        "name": "Skeptic Agent",
+        "role": "反玄学校验，防止过度解释"
+      },
+      {
+        "name": "Synthesizer Agent",
+        "role": "收敛共识"
+      }
+    ],
+    "rounds": [
+      {
+        "round": 1,
+        "theme": "事实校验",
+        "summary": "现实信息仍是主约束；象数标签只辅助组织变量。"
+      },
+      {
+        "round": 2,
+        "theme": "象数争论",
+        "summary": "主象为乾，提示：可主动定方向，但避免压迫。易经趋势为雷风恒转火泽睽，提示：先按本卦策略：围绕持续小步验证；同时预留变卦方向：围绕分歧小步验证。。奇门显示阳遁6局，惊门主事，时机提示：窗口不稳，先控风险或等待新信号。反方提醒：不能把象意当必然结果。"
+      },
+      {
+        "round": 3,
+        "theme": "策略收敛",
+        "summary": "采用三路径输出：顺势路径、受阻路径、反转路径，并设置观察信号。"
+      }
+    ],
+    "consensus": [
+      "不要输出绝对预言，要输出条件概率与触发条件",
+      "过去反推必须绑定事实节点，不能凭空补剧情",
+      "当前主象乾可以作为局势标签，但最终动作仍看现实反馈",
+      "先按本卦策略：围绕持续小步验证；同时预留变卦方向：围绕分歧小步验证。",
+      "适合制造提醒或曝光风险，忌过度刺激；防误判、防内耗、防信息失真"
+    ],
+    "disagreements": [
+      "象数派倾向强调趋势感，现实派要求补充更多证据",
+      "风险派认为需要保留黑天鹅路径，策略派只允许一个当前主动作"
+    ]
+  },
+  "causal": {
+    "past_turning_points": [
+      "当前资料未提供明确时间线，需补充过去关键节点"
+    ],
+    "causal_chain": [
+      "输入事实 → 象数状态标签 → 多Agent争论 → 条件概率路径"
+    ],
+    "missed_signals": [
+      "缺少对方/环境连续反馈时，不判断为必然趋势"
+    ]
+  },
+  "future": {
+    "branches": [
+      {
+        "name": "A 顺势发展",
+        "probability": 0.45,
+        "trigger_conditions": [
+          "现实反馈持续增强",
+          "关键风险未触发",
+          "可主动定方向，但避免压迫"
+        ],
+        "risks": [
+          "过早下定论"
+        ],
+        "outcome": "局势按当前方向推进"
+      },
+      {
+        "name": "B 中途受阻",
+        "probability": 0.35,
+        "trigger_conditions": [
+          "信息不足继续扩大",
+          "外部变量介入",
+          "执行动作过急或过慢"
+        ],
+        "risks": [
+          "误把短期信号当长期趋势"
+        ],
+        "outcome": "进入停滞、冷却或反复"
+      },
+      {
+        "name": "C 突发反转",
+        "probability": 0.2,
+        "trigger_conditions": [
+          "隐藏变量暴露",
+          "时间窗口变化",
+          "关键人物态度突变"
+        ],
+        "risks": [
+          "黑天鹅不可控"
+        ],
+        "outcome": "出现和主路径相反的结果"
+      }
+    ]
+  },
+  "strategy": {
+    "best_action": "可主动定方向，但避免压迫",
+    "forbidden_actions": [
+      "把推演当绝对预言",
+      "在证据不足时做高风险承诺",
+      "跳过现实反馈只看象数"
+    ],
+    "watch_signals": [
+      "对方/市场/环境是否持续反馈",
+      "关键时间节点是否出现新变量",
+      "风险信号是否从隐性变显性"
+    ],
+    "change_conditions": [
+      "新增事实推翻当前假设",
+      "主路径连续两次不成立",
+      "黑天鹅变量出现"
+    ]
+  },
+  "confidence": {
+    "level": "中低",
+    "blind_spots": [
+      "结果走向仍未验证，需要用多路径而非单结论处理",
+      "缺少明确时间节点，奇门/周期判断仅能做语义级参考"
+    ],
+    "principle": "现实证据 > 多Agent共识 > 象数解释"
+  }
+}
