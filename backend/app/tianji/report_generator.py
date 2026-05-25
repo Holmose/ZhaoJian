@@ -92,6 +92,50 @@ class TianJiReportGenerator:
         lines.append(f"- 置信度：{state['confidence']['level']}")
         lines.append(f"- 盲区：{'；'.join(state['confidence']['blind_spots'])}")
         lines.append(f"- 原则：{state['confidence']['principle']}")
+        lines.append("")
+        lines.append("## 9. 通俗解读")
+        if state.get("interpretation"):
+            itp = state["interpretation"]
+            lines.append(f"**{itp.get('plain_title', '')}**")
+            lines.append("")
+            lines.append(f"### 一句话结论")
+            lines.append(f"{itp.get('plain_summary', '')}")
+            lines.append("")
+            lines.append("### 四柱通俗解读")
+            bz = itp.get("bazi", {})
+            lines.append(f"- {bz.get('personality', '')}")
+            lines.append(f"- 身强：{bz.get('strength', '')}")
+            lines.append(f"- 用神：{bz.get('useful', {}).get('what', '')}，{bz.get('useful', {}).get('how', '')}")
+            lines.append(f"- 忌神：{bz.get('forbidden', {}).get('what', '')}")
+            lines.append("")
+            lines.append("### 奇门通俗解读")
+            qm = itp.get("qimen", {})
+            lines.append(f"- {qm.get('core_signal', '')}")
+            lines.append(f"- 局势：{qm.get('summary', '')}")
+            lines.append("")
+            lines.append("### 易经通俗解读")
+            ic = itp.get("iching", {})
+            lines.append(f"- 当前主卦：{ic.get('gua', '')}")
+            lines.append(f"- 趋势：{ic.get('trend', '')}")
+            lines.append(f"- 建议：{ic.get('strategy', '')}")
+            lines.append(f"- 风险：{ic.get('risk', '')}")
+            lines.append("")
+            lines.append("### 综合信号")
+            lines.append(f"- 核心主题：{itp.get('integrated', {}).get('core_theme', '')}")
+            lines.append(f"- 整体基调：{itp.get('integrated', {}).get('tone', '')}")
+            lines.append("")
+            lines.append("### 行动建议")
+            act = itp.get("action", {})
+            lines.append(f"**{act.get('one_liner', '')}**")
+            lines.append("")
+            if act.get("paths"):
+                lines.append("三路径参考：")
+                for p in act.get("paths", []):
+                    lines.append(f"- {p['name']}（{p['prob']}）：{','.join(p['triggers'])} → {p['action']}")
+            if act.get("watch_signals"):
+                lines.append(f"- 观察信号：{','.join(act.get('watch_signals', []))}")
+        else:
+            lines.append("（解读数据未生成）")
         return "\n".join(lines) + "\n"
 
     def save(self, state: dict, out_dir: str | Path) -> dict:
