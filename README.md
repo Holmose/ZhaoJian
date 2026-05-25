@@ -1,21 +1,22 @@
 # TianJi 天机推演系统
 
-> 东方象数增强型多智能体推演系统：融合现实数据、易经八卦、五行、四柱八字、奇门遁甲与 Multi-Agent Simulation，用于过去反推、未来分支预测与决策推演。
+> 东方象数增强型多智能体推演系统：融合现实数据、易经八卦、五行、四柱八字、奇门遁甲与 Multi-Agent Simulation，用于过去反推，未来分支预测与决策推演。
 
 TianJi is an oriental philosophy enhanced multi-agent simulation system for causal reconstruction, future branching, and decision strategy.
 
 ## 当前状态
 
-当前版本为 **V0.4.0 / V1-V4 Prototype Completed**，基于 MiroFish 源码骨架重建，新增 `backend/app/tianji` 天机推演模块，已完成四层核心能力：
+当前版本为 **V0.5.0 / V1-V5 Prototype Completed**，已完成五层核心能力与完整工程体系：
 
 - **V1 语义推演底座**：现实解析、八卦象意、五行动力、本地多 Agent 推演、因果回溯、未来三路径、Markdown / JSON 报告、CLI、HTTP API `/api/tianji/run`
 - **V2 四柱人物长期结构模型**：出生时间输入、近似四柱、日主、可见十神、五行比例、人物倾向、风险模式、Agent 参数
 - **V3 奇门事件局势引擎**：事件时间/地点输入、语义阴阳遁局、九宫、八门、九星、八神、主客关系、时机提示、风险提示、行动提示
 - **V4 易经 64 卦趋势演化引擎**：完整 64 卦语义数据、本卦/变卦、变爻阶段提示、趋势转化、阶段风险、行动提示
+- **V5 示例与测试体系**：3 个领域样例输入、`sample_reports/` 完整报告、4 个单元测试、`npm run test` / `npm run samples`
 
 当前系统已经形成完整推演链路：
 
-```text
+```
 现实解析
   ↓
 八卦/五行状态象意
@@ -31,18 +32,31 @@ TianJi is an oriental philosophy enhanced multi-agent simulation system for caus
 过去反推 + 未来三路径 + 行动建议
 ```
 
-## 快速体验
+快速体验完整链路（包含全部 V1-V4 模块）：
 
 ```bash
 cd backend
-PYTHONPATH=. python scripts/tianji_cli.py "我现在想做一个东方哲学增强型推演系统，未来这个项目能不能做大？" --domain strategy --goal "判断项目路线" --out reports/tianji
+PYTHONPATH=. python scripts/tianji_cli.py \
+  "这个天机推演系统还没完全成熟，未来适不适合继续扩张和公开发布？" \
+  --domain strategy \
+  --goal "判断项目发布与扩张路线" \
+  --event-time "2026-05-26 22:10" \
+  --location "Guangzhou" \
+  --birth-datetime "1998-06-15 14:30" \
+  --gender male \
+  --out reports/tianji
 ```
 
-输出：
+运行测试：
 
-```text
-reports/tianji/tianji_YYYYMMDD_HHMMSS.md
-reports/tianji/tianji_YYYYMMDD_HHMMSS.json
+```bash
+npm run test
+```
+
+生成样例报告：
+
+```bash
+npm run samples
 ```
 
 ## API
@@ -115,7 +129,7 @@ POST /api/tianji/run
 - 主客关系判断
 - 时机提示、风险提示、行动提示
 
-注意：V3 当前是“语义奇门局势引擎”，尚不是完整传统奇门排盘；节气、阴阳遁精确起局、天地盘、用神定位将在后续版本增强。
+注意：V3 当前是语义奇门局势引擎，尚不是完整传统奇门排盘；节气、阴阳遁精确起局、天地盘、用神定位将在后续版本增强。
 
 ### V4：完整 64 卦易经趋势引擎
 
@@ -126,16 +140,18 @@ POST /api/tianji/run
 - 阶段风险与行动提示
 - 与多 Agent 推演报告集成
 
-### V5：Hermes / MiroFish 深度集成
+### V5：示例与测试体系
 
-- 接入完整版多 Agent 调度
-- 接入长期记忆
-- 接入图谱系统
-- 接入 Web UI
-- 预测结果回填与误差分析
-- Agent 权重动态校准
+- 3 个领域样例输入
+- `sample_reports/` 完整 Markdown / JSON 报告
+- 4 个单元测试覆盖 IChing / Bazi / Qimen / Orchestrator
+- `npm run test` / `npm run samples`
 
-## 原则
+### V6：深度推理增强
+
+计划接入更复杂的多步推理能力，增强模拟适配器。
+
+## 使用原则
 
 1. 现实优先，象数辅助。
 2. 多路径输出，不做绝对断言。
@@ -146,4 +162,4 @@ POST /api/tianji/run
 
 ## License & Attribution
 
-This prototype is rebuilt on top of the MiroFish codebase and follows the original AGPL-3.0 license. See [LICENSE](./LICENSE).
+This prototype is rebuilt on top of the MiroFish codebase and follows the original AGPL-3.0 license. See [LICENSE](./LICENSE) and [NOTICE.md](./NOTICE.md).
