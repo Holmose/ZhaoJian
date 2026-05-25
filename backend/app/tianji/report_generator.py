@@ -33,7 +33,7 @@ class TianJiReportGenerator:
                 lq = [f"{l['position']}{l['relation']}" for l in ip['liu_qin']]
                 lines.append(f"  - 六亲：{' '.join(lq)}")
             if ip.get('changing_line_detail'):
-                chg = [f"{l['position']}{l['label']}" for l in ip['changing_line_detail'] if l.get('change')]
+                chg = [f"{l['position']}{l['label']}" for l in ip['changing_line_detail'] if l.get('label') and l['label'].startswith(('老','少'))]
                 if chg: lines.append(f"  - 动爻：{' '.join(chg)}")
         if s['bazi'].get('status') == 'ok':
             bazi = s['bazi']
