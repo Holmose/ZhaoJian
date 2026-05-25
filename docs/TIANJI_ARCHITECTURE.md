@@ -37,7 +37,7 @@ Output: domain, facts, timeline, people, known variables, unknown variables, con
 ### Symbolic Engine
 
 Input: raw text + domain.
-Output: bagua, wuxing, iching, bazi placeholder, qimen placeholder.
+Output: bagua, wuxing, V4 iching transition, V2 bazi natal pattern, V3 qimen situation model.
 
 ### Simulation Adapter
 
