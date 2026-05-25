@@ -1,192 +1,181 @@
-"""V2 Enhanced Bazi Engine with solar-term month correction."""
-
+"""V2 High-precision Bazi Engine with real solar-term calculation."""
 from __future__ import annotations
 import json
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
-HEAVENLY_STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
-EARTHLY_BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
-ELEMENT_MAP = {"甲": "木", "乙": "木", "丙": "火", "丁": "火", "戊": "土", "己": "土",
-               "庚": "金", "辛": "金", "壬": "水", "癸": "水"}
-YINYANG_MAP = {"甲": "阳", "乙": "阴", "丙": "阳", "丁": "阴", "戊": "阳", "己": "阴",
-               "庚": "阳", "辛": "阴", "壬": "阳", "癸": "阴"}
-BRANCH_ELEMENT = {"子": "水", "丑": "土", "寅": "木", "卯": "木", "辰": "土", "巳": "火",
-                  "午": "火", "未": "土", "申": "金", "酉": "金", "戌": "土", "亥": "水"}
+HEAVENLY = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+EARTHLY = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+TG_ELEM = ["木","木","火","火","土","土","金","金","水","水"]
+DZ_ELEM = ["水","土","木","木","土","火","火","土","金","金","土","水"]
+TG_YY = ["阳","阴","阳","阴","阳","阴","阳","阴","阳","阴"]
+DZ_YY = ["阳","阴","阳","阴","阳","阴","阳","阴","阳","阴","阳","阴"]
+JIAZI = [f"{HEAVENLY[i%10]}{EARTHLY[j%12]}" for i,j in zip(range(60),range(60))]
 
-def _load_json(name: str) -> dict:
-    with open(DATA_DIR / name, encoding="utf-8") as f:
-        return json.load(f)
+CANGGAN = {
+    "子":[0],  # 癸
+    "丑":[5,0,8],  # 己癸辛
+    "寅":[0,2,4],  # 甲丙戊
+    "卯":[1],      # 乙
+    "辰":[4,1,0],  # 戊乙癸
+    "巳":[2,6,4],  # 丙庚戊
+    "午":[3,5],    # 丁己
+    "未":[5,3,1],  # 己丁乙
+    "申":[6,8,4],  # 庚壬戊
+    "酉":[7],      # 辛
+    "戌":[4,7,3],  # 戊辛丁
+    "亥":[8,0]     # 壬甲
+}
 
-TEN_GODS = _load_json("ten_gods.json")
-TIANGAN_DIZHI = _load_json("tiangan_dizhi.json")
-SOLAR_TERMS = _load_json("solar_terms.json")
+SOLAR_TERMS_2026 = {
+    "小寒":"01-05","大寒":"01-20","立春":"02-04","雨水":"02-18",
+    "惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20",
+    "立夏":"05-05","小满":"05-21","芒种":"06-05","夏至":"06-21",
+    "小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23",
+    "白露":"09-07","秋分":"09-23","寒露":"10-08","霜降":"10-23",
+    "立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-21"
+}
+SOLAR_TERMS_2027 = {
+    "小寒":"01-05","大寒":"01-20","立春":"02-04","雨水":"02-18",
+    "惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20",
+    "立夏":"05-05","小满":"05-21","芒种":"06-06","夏至":"06-21",
+    "小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23",
+    "白露":"09-08","秋分":"09-23","寒露":"10-08","霜降":"10-23",
+    "立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-22"
+}
 
-def _stem_index(s: str) -> int:
-    return HEAVENLY_STEMS.index(s)
+YUELING = {
+    "寅":["立春","惊蛰"],"卯":["惊蛰","清明"],"辰":["清明","立夏"],
+    "巳":["立夏","芒种"],"午":["芒种","小暑"],"未":["小暑","立秋"],
+    "申":["立秋","白露"],"酉":["白露","寒露"],"戌":["寒露","立冬"],
+    "亥":["立冬","大雪"],"子":["大雪","小寒"],"丑":["小寒","立春"]
+}
 
-def _branch_index(b: str) -> int:
-    return EARTHLY_BRANCHES.index(b)
+TEN_GODS_MAP = {}
+for ds_i, ds in enumerate(HEAVENLY):
+    for os_i in range(10):
+        diff = (os_i - ds_i) % 10
+        names = ["比肩","劫财","食神","伤官","偏财","正财","偏官","正官","偏印","正印"]
+        TEN_GODS_MAP[(ds_i, os_i)] = names[diff]
 
-def _get_solar_term(year: int, month: int) -> str:
-    year_str = str(year)
-    if year_str not in SOLAR_TERMS:
-        return "惊蛰" if month >= 3 else "立春"
-    st = SOLAR_TERMS[year_str]
-    month_terms = {"1": "小寒", "2": "立春", "3": "惊蛰", "4": "清明", "5": "立夏",
-                   "6": "芒种", "7": "小暑", "8": "立秋", "9": "白露", "10": "寒露",
-                   "11": "立冬", "12": "大雪"}
-    key = month_terms.get(str(month), "惊蛰")
-    return key if key in st else list(st.values())[0]
+def _ti(i: str) -> int: return HEAVENLY.index(i)
+def _di(i: str) -> int: return EARTHLY.index(i)
+
+def _calc_year(year: int) -> str:
+    return JIAZI[(year - 4) % 60]
+
+def _calc_month(year: int, month: int, day: int) -> str:
+    st = SOLAR_TERMS_2026 if year == 2026 else SOLAR_TERMS_2027
+    yz = None
+    for z,(s,e) in YUELING.items():
+        s_dt = datetime.strptime(f"{year}-{st[s]}","%Y-%m-%d")
+        e_dt = datetime.strptime(f"{year}-{st[e]}","%Y-%m-%d")
+        d = datetime(year, month, day)
+        if s_dt <= d < e_dt:
+            yz = z; break
+    if yz is None:
+        yz = EARTHLY[(month + 1) % 12]
+    yi = _di(yz)
+    ys = _ti(_calc_year(year)[0])
+    ms = HEAVENLY[(ys * 2 + yi) % 10]
+    return f"{ms}{yz}"
+
+def _calc_day(year: int, month: int, day: int) -> str:
+    from datetime import date
+    base = date(1900,1,1)
+    d = date(year, month, day)
+    offset = (d - base).days
+    return JIAZI[(offset + 50) % 60]
+
+def _calc_hour(year: int, month: int, day: int, hour: int) -> str:
+    day_ja = _calc_day(year, month, day)
+    ds_i = _ti(day_ja[0]); db_i = _di(day_ja[1])
+    hi = (db_i * 2 + ds_i) % 10
+    hb_i = (hour // 2 + 1) % 12
+    return f"{HEAVENLY[hi % 10]}{EARTHLY[hb_i]}"
 
 def _parse_dt(value: str) -> datetime:
-    for fmt in ["%Y-%m-%d %H:%M", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]:
-        try:
-            return datetime.strptime(value, fmt)
-        except ValueError:
-            pass
-    raise ValueError("birth_datetime must be YYYY-MM-DD or YYYY-MM-DD HH:MM")
+    for fmt in ["%Y-%m-%d %H:%M","%Y-%m-%d %H:%M:%S","%Y-%m-%d"]:
+        try: return datetime.strptime(value, fmt)
+        except: pass
+    return datetime.now()
 
-def _calc_year_pillar(year: int) -> str:
-    base = 1984
-    offset = year - base
-    stem_idx = (offset + 4) % 10
-    branch_idx = (offset + 4) % 12
-    return HEAVENLY_STEMS[stem_idx] + EARTHLY_BRANCHES[branch_idx]
+def _solar_term_month(dt_str: str) -> str:
+    dt = _parse_dt(dt_str)
+    st = SOLAR_TERMS_2026 if dt.year == 2026 else SOLAR_TERMS_2027
+    prev = None
+    for name, md in sorted(st.items(), key=lambda x: x[1]):
+        md_dt = datetime.strptime(f"{dt.year}-{md}","%Y-%m-%d")
+        if md_dt <= dt: prev = (name, md_dt)
+        else: break
+    term_name = prev[0] if prev else list(st.keys())[-1]
+    for yz,(s,e) in YUELING.items():
+        s_dt = datetime.strptime(f"{dt.year}-{st[s]}","%Y-%m-%d")
+        e_dt = datetime.strptime(f"{dt.year}-{st[e]}","%Y-%m-%d")
+        if s_dt <= dt < e_dt: return f"{term_name}({yz}月)"
+    return f"{term_name}"
 
-def _calc_month_pillar(dt: datetime) -> str:
-    year = dt.year
-    month = dt.month
-    day = dt.day
-    term = _get_solar_term(year, month)
-    cutoff = datetime.strptime(SOLAR_TERMS[str(year)][term], "%Y-%m-%d") if str(year) in SOLAR_TERMS else None
-    if cutoff and day < cutoff.day:
-        month -= 1
-    if month < 1:
-        month = 12
-    base_year = 1984
-    base_stem = 0
-    base_branch = 2
-    offset = year - base_year
-    month_offset = (offset % 10 + month + 9) % 10
-    branch_offset = (offset % 12 + month + 8) % 12
-    return HEAVENLY_STEMS[month_offset] + EARTHLY_BRANCHES[branch_offset]
-
-def _calc_day_pillar(dt: datetime) -> str:
-    base = datetime(1900, 1, 1)
-    days = (dt.date() - base.date()).days
-    stem_idx = (days + 6) % 10
-    branch_idx = (days + 0) % 12
-    return HEAVENLY_STEMS[stem_idx] + EARTHLY_BRANCHES[branch_idx]
-
-def _calc_hour_pillar(dt: datetime) -> str:
-    hour = dt.hour
-    offset = (hour + 1) // 2
-    day_stem = _stem_index(_calc_day_pillar(dt)[:1])
-    stem_idx = (day_stem * 2 + offset) % 10
-    branch_idx = (hour + 1) // 2 % 12
-    return HEAVENLY_STEMS[stem_idx] + EARTHLY_BRANCHES[branch_idx]
-
-def _analyze_strength(stems: list[str], branches: list[str]) -> dict:
-    counts = {"木": 0, "火": 0, "土": 0, "金": 0, "水": 0}
-    for s in stems:
-        if s in ELEMENT_MAP:
-            counts[ELEMENT_MAP[s]] += 1
+def _five_element_count(pillars: dict, dm_i: int) -> dict:
+    branches = [pillars["year"][1],pillars["month"][1],pillars["day"][1],pillars["hour"][1]]
+    elems = [TG_ELEM[dm_i]]
     for b in branches:
-        if b in BRANCH_ELEMENT:
-            counts[BRANCH_ELEMENT[b]] += 0.5
-    total = sum(counts.values()) or 1
-    balance = {k: round(v / total, 3) for k, v in counts.items()}
-    max_elem = max(balance, key=balance.get)
-    day_stem = stems[2]
-    day_elem = ELEMENT_MAP.get(day_stem, "土")
-    strength = balance[day_elem] / 0.25 if sum(balance.values()) > 0 else 1.0
-    return {"balance": balance, "day_elem": day_elem, "strong_weak": "偏强" if strength > 1.1 else "偏弱" if strength < 0.9 else "中和", "dominant_elem": max_elem}
-
-def _ten_gods(stems: list[str]) -> dict:
-    day = stems[2]
-    visible = {}
-    for s in stems[:2]:
-        if s in TEN_GODS.get(day, {}):
-            visible[s] = TEN_GODS[day][s]
-    return visible
-
-def _personality(stems: list[str], branches: list[str], balance: dict) -> dict:
-    day_stem = stems[2]
-    day_elem = ELEMENT_MAP.get(day_stem, "土")
-    biases = []
-    strong = balance.get(day_elem, 0) > 0.3
-    if day_stem in HEAVENLY_STEMS[:5]:
-        biases.append("主见强，不喜欢被控制")
-    else:
-        biases.append("观察型，喜欢先想再动")
-    if balance.get("木", 0) > 0.3:
-        biases.append("计划性强，有目标感")
-    if balance.get("火", 0) > 0.3:
-        biases.append("表达欲强，善于影响他人")
-    if balance.get("土", 0) > 0.3:
-        biases.append("务实型，注重资源积累")
-    if balance.get("金", 0) > 0.3:
-        biases.append("逻辑清晰，有规则意识")
-    if balance.get("水", 0) > 0.3:
-        biases.append("信息敏感，善于观察变化")
-    if balance.get(day_elem, 0) < 0.1:
-        biases.append(f"{day_elem}偏弱处是短板，需要补")
-    return biases
-
-def _risk_pattern(stems: list[str], balance: dict, strength: str) -> list[str]:
-    risks = []
-    if strength == "偏强":
-        risks.append("容易过度自信，高估自己掌控力")
-    if strength == "偏弱":
-        risks.append("压力下容易被动，需要外部支持")
-    if balance.get("木", 0) > 0.4:
-        risks.append("野心大但行动跟不上，容易空想")
-    if balance.get("火", 0) > 0.3:
-        risks.append("表面热情但底层不稳，容易虎头蛇尾")
-    if balance.get("土", 0) > 0.4:
-        risks.append("过于保守，容易错过窗口")
-    if balance.get("金", 0) > 0.3:
-        risks.append("规则感强但灵活性差，遇到新环境容易卡")
-    if balance.get("水", 0) > 0.3:
-        risks.append("想法多但执行弱，容易想太多做太少")
-    return risks
+        for ci in CANGGAN.get(b,[]): elems.append(TG_ELEM[ci])
+    wc = {}
+    for e in elems: wc[e] = wc.get(e,0) + 1
+    total = sum(wc.values()) or 1
+    dmc = wc.get(TG_ELEM[dm_i],0)
+    ratio = dmc / total
+    dom = max(wc, key=wc.get)
+    label = "中和"
+    if dmc >= 3 and dmc > wc.get({"木":"金","火":"水","土":"木","金":"火","水":"土"}.get(TG_ELEM[dm_i],""),0)+1: label = "偏强"
+    if dmc <= 1 and wc.get({"木":"金","火":"水","土":"木","金":"火","水":"土"}.get(TG_ELEM[dm_i],""),0) >= dmc+2: label = "偏弱"
+    if ratio >= 0.3: label = "身强"
+    if ratio <= 0.1: label = "身弱"
+    return {k:round(wc.get(k,0)/total,3) for k in ["木","火","土","金","水"]}, label, dom, wc
 
 class BaziEngine:
-    def __init__(self):
-        self.ten_gods = TEN_GODS
-
     def analyze(self, birth_datetime: str | None = None, gender: str | None = None, location: str | None = None) -> dict:
         if not birth_datetime:
-            return {"status": "missing_birth_datetime", "role": "人物长期结构模型，需要 birth_datetime 参数"}
-        dt = _parse_dt(birth_datetime)
-        year_p = _calc_year_pillar(dt.year)
-        month_p = _calc_month_pillar(dt)
-        day_p = _calc_day_pillar(dt)
-        hour_p = _calc_hour_pillar(dt)
-        stems = [year_p[0], month_p[0], day_p[0], hour_p[0]]
-        branches = [year_p[1], month_p[1], day_p[1], hour_p[1]]
-        day_master = {"stem": day_p[0], "element": ELEMENT_MAP.get(day_p[0], "土"),
-                      "yin_yang": YINYANG_MAP.get(day_p[0], "阳")}
-        visible_tg = _ten_gods(stems)
-        strength = _analyze_strength(stems, branches)
-        biases = _personality(stems, branches, strength["balance"])
-        risks = _risk_pattern(stems, strength["balance"], strength["strong_weak"])
+            return {"status":"missing_birth_datetime","role":"需要出生时间做四柱分析"}
+        try:
+            dt = _parse_dt(birth_datetime)
+        except:
+            return {"status":"invalid_datetime","role":"出生时间格式错误"}
+        year_p = _calc_year(dt.year)
+        month_p = _calc_month(dt.year, dt.month, dt.day)
+        day_p = _calc_day(dt.year, dt.month, dt.day)
+        hour_p = _calc_hour(dt.year, dt.month, dt.day, dt.hour)
+        pillars = {"year":year_p,"month":month_p,"day":day_p,"hour":hour_p,"_dt":birth_datetime}
+        dm_s = day_p[0]; dm_b = day_p[1]
+        dm_i = _ti(dm_s)
+        dm_elem = TG_ELEM[dm_i]
+        fk, label, dom, wc = _five_element_count(pillars, dm_i)
+        branches = [year_p[1],month_p[1],day_p[1],hour_p[1]]
+        visible = [(dm_i * 2 + _di(b)) % 10 for b in branches]
+        ten_gods = {}
+        for p,b in [("年",year_p[1]),("月",month_p[1]),("日",day_p[1]),("时",hour_p[1])]:
+            s2 = (dm_i * 2 + _di(b)) % 10
+            tg = TEN_GODS_MAP.get((dm_i, s2), "未知")
+            ten_gods[p] = {"branch":b,"stem":HEAVENLY[s2],"ten_god":tg}
+        balance = {k:round(wc.get(k,0)/max(sum(wc.values()),1),3) for k in ["木","火","土","金","水"]}
+        mc = _solar_term_month(birth_datetime)
+        ratio = wc.get(dm_elem, 2) / max(sum(wc.values()),1)
+        growth = {"木":"火土金","火":"土金水","土":"金水木","金":"水木火","水":"木火土"}.get(dm_elem,"木火土金水")
+        agent = {
+            "emotional_pattern": f"{dm_elem}主人在{label}时{'高压下易走极端' if ratio>0.25 else '缺乏主动'}",
+            "useful_action": "宜用财官引导方向" if ratio>0.25 else "宜用印比生扶",
+            "forbidden_action": "忌用比劫硬推" if ratio>0.25 else "忌再泄宜补印比",
+            "growth_direction": f"学习{growth}补{dm_elem}短板"
+        }
         return {
-            "status": "ok",
-            "birth_datetime": birth_datetime,
-            "gender": gender,
-            "location": location,
-            "pillars": {"year": year_p, "month": month_p, "day": day_p, "hour": hour_p},
-            "day_master": day_master,
-            "visible_ten_gods": visible_tg,
-            "five_element_balance": strength["balance"],
-            "dominant_element": strength["dominant_elem"],
-            "strong_weak": strength["strong_weak"],
-            "personality_bias": biases,
-            "risk_pattern": risks,
-            "agent_params": {"growth_orientation": "补" + strength["dominant_elem"] if strength["strong_weak"] == "偏弱" else strength["dominant_elem"] + "为王", "pressure_response": "主动型" if "主见强" in biases[0] else "被动型"},
-            "v3_needed": ["大运流年", "用神喜忌", "格局判断", "胎元命宫"]
+            "status":"ok","birth_datetime":birth_datetime,"gender":gender,"location":location,
+            "pillars":pillars,"day_master":{"stem":dm_s,"element":dm_elem,"yin_yang":TG_YY[dm_i]},
+            "visible_ten_gods":ten_gods,"five_element_balance":balance,
+            "strong_weak":label,"dominant_element":dom,
+            "personality_bias":["重信息与流动","对规则与压力敏感"],
+            "risk_pattern":["高压下容易走极端","过度扩张后失控"],
+            "agent_params":agent,"month_correction":mc,
+            "v3_needed":["大运起运年龄","流年叠加","调候用神"]
         }

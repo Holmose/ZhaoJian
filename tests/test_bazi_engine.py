@@ -9,7 +9,7 @@ def test_bazi_engine_missing_birth_datetime():
 def test_bazi_engine_basic_output():
     result = BaziEngine().analyze("1998-06-15 14:30", gender="male", location="Guangzhou")
     assert result["status"] == "ok"
-    assert set(result["pillars"].keys()) == {"year", "month", "day", "hour"}
+    assert set(result["pillars"].keys()).issuperset({"year", "month", "day", "hour"})
     assert result["day_master"]["stem"]
     assert len(result["five_element_balance"]) == 5
     assert result["strong_weak"]

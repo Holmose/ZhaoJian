@@ -1,128 +1,233 @@
+"""High-precision Bazi Precision Engine v2."""
 from __future__ import annotations
 
-STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
-BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
-STEM_ELE = {"甲": "木", "乙": "木", "丙": "火", "丁": "火", "戊": "土",
-            "己": "土", "庚": "金", "辛": "金", "壬": "水", "癸": "水"}
-BRANCH_ELE = {"子": "水", "丑": "土", "寅": "木", "卯": "木", "辰": "土",
-              "巳": "火", "午": "火", "未": "土", "申": "金", "酉": "金",
-              "戌": "土", "亥": "水"}
+TIANGAN = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+TG_INDEX = {k:i for i,k in enumerate(TIANGAN)}
+TG_WUXING = ["木","木","火","火","土","土","金","金","水","水"]
 
-GOD_TABLE = {
-    "甲": {"甲": "比", "乙": "劫", "丙": "食", "丁": "伤", "戊": "财",
-           "己": "才", "庚": "杀", "辛": "官", "壬": "枭", "癸": "印"},
-    "乙": {"甲": "劫", "乙": "比", "丙": "伤", "丁": "食", "戊": "才",
-           "己": "财", "庚": "官", "辛": "杀", "壬": "印", "癸": "枭"},
-    "丙": {"甲": "枭", "乙": "印", "丙": "比", "丁": "劫", "戊": "食",
-           "己": "伤", "庚": "财", "辛": "才", "壬": "杀", "癸": "官"},
-    "丁": {"甲": "印", "乙": "枭", "丙": "劫", "丁": "比", "戊": "伤",
-           "己": "食", "庚": "才", "辛": "财", "壬": "官", "癸": "杀"},
-    "戊": {"甲": "杀", "乙": "官", "丙": "枭", "丁": "印", "戊": "比",
-           "己": "劫", "庚": "食", "辛": "伤", "壬": "财", "癸": "才"},
-    "己": {"甲": "官", "乙": "杀", "丙": "印", "丁": "枭", "戊": "劫",
-           "己": "比", "庚": "伤", "辛": "食", "壬": "才", "癸": "财"},
-    "庚": {"甲": "财", "乙": "才", "丙": "杀", "丁": "官", "戊": "枭",
-           "己": "印", "庚": "比", "辛": "劫", "壬": "食", "癸": "伤"},
-    "辛": {"甲": "才", "乙": "财", "丙": "官", "丁": "杀", "戊": "印",
-           "己": "枭", "庚": "劫", "辛": "比", "壬": "伤", "癸": "食"},
-    "壬": {"甲": "食", "乙": "伤", "丙": "财", "丁": "才", "戊": "杀",
-           "己": "官", "庚": "枭", "辛": "印", "壬": "比", "癸": "劫"},
-    "癸": {"甲": "伤", "乙": "食", "丙": "才", "丁": "财", "戊": "官",
-           "己": "杀", "庚": "印", "辛": "枭", "壬": "劫", "癸": "比"},
+DIZHI = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+DZ_INDEX = {k:i for i,k in enumerate(DIZHI)}
+DZ_WUXING = ["水","土","木","木","土","火","火","土","金","金","土","水"]
+
+JIAZI = [f"{TIANGAN[i%10]}{DIZHI[j%12]}" for i,j in zip(range(60),range(60))]
+
+CANGGAN = {
+    "子":[TG_INDEX["癸"]],
+    "丑":[TG_INDEX["己"],TG_INDEX["癸"],TG_INDEX["辛"]],
+    "寅":[TG_INDEX["甲"],TG_INDEX["丙"],TG_INDEX["戊"]],
+    "卯":[TG_INDEX["乙"]],
+    "辰":[TG_INDEX["戊"],TG_INDEX["乙"],TG_INDEX["癸"]],
+    "巳":[TG_INDEX["丙"],TG_INDEX["庚"],TG_INDEX["戊"]],
+    "午":[TG_INDEX["丁"],TG_INDEX["己"]],
+    "未":[TG_INDEX["己"],TG_INDEX["丁"],TG_INDEX["乙"]],
+    "申":[TG_INDEX["庚"],TG_INDEX["壬"],TG_INDEX["戊"]],
+    "酉":[TG_INDEX["辛"]],
+    "戌":[TG_INDEX["戊"],TG_INDEX["辛"],TG_INDEX["丁"]],
+    "亥":[TG_INDEX["壬"],TG_INDEX["甲"]]
 }
 
+YUELING_MONTH = {
+    "寅":["立春","惊蛰"],"卯":["惊蛰","清明"],"辰":["清明","立夏"],
+    "巳":["立夏","芒种"],"午":["芒种","小暑"],"未":["小暑","立秋"],
+    "申":["立秋","白露"],"酉":["白露","寒露"],"戌":["寒露","立冬"],
+    "亥":["立冬","大雪"],"子":["大雪","小寒"],"丑":["小寒","立春"]
+}
+
+ST_2026 = {
+    "小寒":"01-05","大寒":"01-20","立春":"02-04","雨水":"02-18",
+    "惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20",
+    "立夏":"05-05","小满":"05-21","芒种":"06-05","夏至":"06-21",
+    "小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23",
+    "白露":"09-07","秋分":"09-23","寒露":"10-08","霜降":"10-23",
+    "立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-21"
+}
+ST_2027 = {
+    "小寒":"01-05","大寒":"01-20","立春":"02-04","雨水":"02-18",
+    "惊蛰":"03-05","春分":"03-20","清明":"04-04","谷雨":"04-20",
+    "立夏":"05-05","小满":"05-21","芒种":"06-06","夏至":"06-21",
+    "小暑":"07-07","大暑":"07-22","立秋":"08-07","处暑":"08-23",
+    "白露":"09-08","秋分":"09-23","寒露":"10-08","霜降":"10-23",
+    "立冬":"11-07","小雪":"11-22","大雪":"12-07","冬至":"12-22"
+}
+
+NEED_ELEM = {"木":"金","火":"水","土":"木","金":"火","水":"土"}
+CONTROL_ELEM = {"木":"金","火":"水","土":"木","金":"火","土":"土"}
+SUPPORT_ELEM = {"木":"水","火":"木","土":"火","金":"土","水":"金"}
+
+def _ten_god(ds: int, os: int) -> str:
+    if ds == os: return "比肩"
+    diff = (os - ds) % 10
+    return ["劫财","食神","伤官","偏财","正财","偏官","正官","偏印","正印","比肩"][diff]
+
+def _branch_stem(year: int, month: int, day: int, hour: int) -> dict:
+    # 六十甲子年柱
+    year_ja = JIAZI[(year - 4) % 60]
+    year_stem = year_ja[0]; year_branch = year_ja[1]
+    yi = DZ_INDEX[year_branch]; ysi = TG_INDEX[year_stem]
+    # 月柱
+    month_branch_list = ["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"]
+    mz = month_branch_list[(month + 1) % 12]
+    msi = (ysi * 2 + yi) % 10
+    ms = TIANGAN[msi % 10]
+    # 日柱：简化用儒略日近似
+    from datetime import date
+    d0 = date(1900,1,1); d1 = date(year,month,day)
+    days = (d1 - d0).days
+    di = (days + 40) % 60
+    day_ja = JIAZI[di]
+    ds = day_ja[0]; db = day_ja[1]
+    dsi = TG_INDEX[ds]; dbi = DZ_INDEX[db]
+    # 时柱
+    hsi = (dsi * 2) % 10
+    hbi = (dbi + 1) % 12
+    hs = TIANGAN[hsi % 10]; hb = DIZHI[hbi]
+    return {
+        "year": f"{year_stem}{year_branch}",
+        "month": f"{ms}{mz}",
+        "day": f"{ds}{db}",
+        "hour": f"{hs}{hb}",
+        "day_stem_idx": dsi, "day_branch_idx": dbi,
+        "year_stem_idx": TG_INDEX[year_stem],
+        "month_stem_idx": msi % 10,
+        "hour_stem_idx": hsi % 10
+    }
+
+def _solar_term_month(dt_str: str) -> str:
+    from datetime import datetime
+    try:
+        dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M")
+    except:
+        try:
+            dt = datetime.strptime(dt_str.split()[0], "%Y-%m-%d")
+        except:
+            return "未知月令"
+    st = ST_2026 if dt.year == 2026 else ST_2027
+    prev = None
+    for name, md in sorted(st.items(), key=lambda x: x[1]):
+        md_dt = datetime.strptime(f"{dt.year}-{md}", "%Y-%m-%d")
+        if md_dt <= dt:
+            prev = (name, md_dt)
+        else:
+            break
+    if not prev:
+        prev = list(sorted(st.items(), key=lambda x: x[1]))[-1]
+    term_name, term_dt = prev
+    for yz, (s,e) in YUELING_MONTH.items():
+        s_dt = datetime.strptime(f"{dt.year}-{st[s]}", "%Y-%m-%d")
+        e_dt = datetime.strptime(f"{dt.year}-{st[e]}", "%Y-%m-%d")
+        if s_dt <= dt < e_dt:
+            return f"{term_name}({yz}月)"
+    return f"{term_name}"
+
+def _calc_balance(pillars: dict, dm: dict) -> dict:
+    dsi = TG_INDEX[dm["stem"]]
+    dbi = DZ_INDEX[pillars["day"][1]]
+    branches = [pillars["year"][1], pillars["month"][1], pillars["day"][1], pillars["hour"][1]]
+    visible = []
+    for b in branches:
+        stem = (dsi * 2 + DZ_INDEX[b]) % 10
+        visible.append(stem)
+    all_elem = [TG_WUXING[dsi]]
+    for b in branches:
+        if b in CANGGAN:
+            all_elem.append(TG_WUXING[CANGGAN[b][0]])
+    wc = {}
+    for e in all_elem:
+        wc[e] = wc.get(e,0) + 1
+    total = sum(wc.values()) or 1
+    dmc = wc.get(dm["element"], 0)
+    label = "中和"
+    if dmc >= 3 and dmc > wc.get(NEED_ELEM.get(dm["element"],""),0)+1:
+        label = "偏强"
+    if dmc <= 1 and wc.get(NEED_ELEM.get(dm["element"],""),0) >= dmc + 2:
+        label = "偏弱"
+    ratio = dmc / total
+    if ratio >= 0.3: label = "身强"
+    if ratio <= 0.1: label = "身弱"
+    dom = max(wc, key=wc.get)
+    bal = {k: round(wc.get(k,0)/total, 3) for k in ["木","火","土","金","水"]}
+    return label, dom, bal, wc
+
+def _calc_useful(dsi: int, dbi: int, ratio: float, wc: dict) -> dict:
+    dm_elem = TG_WUXING[dsi]
+    # element to stem mapping (first occurrence)
+    elem_to_stem = {}
+    for i, e in enumerate(TG_WUXING):
+        if e not in elem_to_stem:
+            elem_to_stem[e] = i
+    # what this element needs to control
+    need_elem = NEED_ELEM.get(dm_elem, dm_elem)
+    ctrl_elem = CONTROL_ELEM.get(dm_elem, dm_elem)
+    supp_elem = SUPPORT_ELEM.get(dm_elem, dm_elem)
+    need_stem = elem_to_stem.get(need_elem, dsi)
+    ctrl_stem = elem_to_stem.get(ctrl_elem, (dsi+5)%10)
+    supp_stem = elem_to_stem.get(supp_elem, dsi)
+    if ratio > 0.25:
+        useful = [TIANGAN[need_stem], TIANGAN[ctrl_stem]]
+        note = "身强宜用财官抑身"
+    else:
+        useful = [TIANGAN[supp_stem], TIANGAN[need_stem]]
+        note = "身弱宜用印比生扶"
+    return {"stems": useful, "note": note}
+
+def _calc_forbidden(dsi: int, dbi: int, ratio: float) -> dict:
+    dm_elem = TG_WUXING[dsi]
+    same_elem_stems = [i for i in range(10) if TG_WUXING[i] == dm_elem]
+    if ratio > 0.25:
+        forbidden = [TIANGAN[i] for i in same_elem_stems]
+        note = "比劫过旺则争宜收敛"
+    else:
+        forbidden = [TIANGAN[dsi]]
+        note = "身弱忌再泄宜补印比"
+    return {"stems": forbidden, "note": note}
+
+def _growth(dm_elem: str) -> str:
+    cycle = {"木":"火土金","火":"土金水","土":"金水木","金":"水木火","水":"木火土"}
+    return cycle.get(dm_elem, "木火土金水")
 
 class BaziPrecisionEngine:
-    """V3 Precision Bazi engine.
-
-    Adds: useful god / forbidden god, hidden stems analysis,
-    lunar month correction, day stem-cycle index for 60-cycle mapping.
-    """
-
-    def analyze(self, pillars: dict, day_master: dict, strong_weak: str,
-                dominant: str, balance: dict) -> dict:
-        dm_stem = day_master["stem"]
-        dm_ele = day_master["element"]
-        month_stem = pillars["month"][0]
-        month_branch = pillars["month"][1]
-        month_ele = BRANCH_ELE[month_branch]
-
-        useful = self._calc_useful(dm_stem, strong_weak)
-        avoid = self._calc_avoid(dm_stem, strong_weak)
-        hidden = self._hidden_stems(pillars)
-        month_correction = self._month_correction(month_branch)
-        day_idx = STEMS.index(dm_stem)
-
-        agent_params = self._agent_params(dm_stem, dm_ele, strong_weak, useful, avoid)
-
+    def analyze(self, pillars: dict, day_master: dict, strength: str, dominant_element: str, five_element_balance: dict) -> dict:
+        dsi = TG_INDEX[day_master["stem"]]
+        dbi = DZ_INDEX[pillars["day"][1]]
+        dm_elem = day_master["element"]
+        branches = [pillars["year"][1], pillars["month"][1], pillars["day"][1], pillars["hour"][1]]
+        visible = []
+        ten_gods = {}
+        hidden = {}
+        for p, b in [("年",branches[0]),("月",branches[1]),("日",branches[2]),("时",branches[3])]:
+            s2 = (dsi * 2 + DZ_INDEX[b]) % 10
+            visible.append(s2)
+            tg = _ten_god(dsi, s2)
+            ten_gods[p] = {
+                "branch": b,
+                "stem": TIANGAN[s2],
+                "ten_god": tg,
+                "stem_element": TG_WUXING[s2],
+                "canggan": [TIANGAN[c] for c in CANGGAN.get(b, [])]
+            }
+            hidden[p] = [TIANGAN[c] for c in CANGGAN.get(b, [])]
+        mc = _solar_term_month(pillars.get("_dt", "2026-06-15"))
+        label, dom, bal, wc = _calc_balance(pillars, day_master)
+        ratio = wc.get(dm_elem, 2) / max(sum(wc.values()), 1)
+        useful = _calc_useful(dsi, dbi, ratio, wc)
+        forbidden = _calc_forbidden(dsi, dbi, ratio)
+        elem_str = {k:{"count":wc.get(k,0),"ratio":round(wc.get(k,0)/max(sum(wc.values()),1),3)} for k in ["木","火","土","金","水"]}
+        growth = _growth(dm_elem)
+        agent = {
+            "emotional_pattern": f"{dm_elem}主人在{label}时高压下易{'走极端' if ratio>0.25 else '缺乏主动'}",
+            "useful_action": f"宜用{useful['stems']}引导方向",
+            "forbidden_action": f"忌用{forbidden['stems']}硬推",
+            "growth_direction": f"学习{growth}补{dm_elem}短板",
+            "dominant_behavior": f"主{dom}性五行，{wc.get(dom,0)}项能量占优"
+        }
         return {
             "useful_god": useful,
-            "forbidden_god": avoid,
+            "forbidden_god": forbidden,
             "hidden_stems": hidden,
-            "month_correction": month_correction,
-            "agent_params": agent_params
+            "ten_gods_detail": ten_gods,
+            "month_correction": mc,
+            "element_strength": elem_str,
+            "balance_analysis": {"label": label, "dominant": dom, "day_ratio": round(ratio,3), "wuxing_count": wc},
+            "agent_params": agent,
+            "v4_needed": ["大运起运年龄","流年叠加","调候用神","格局判断","真太阳时"]
         }
-
-    def _calc_useful(self, dm_stem: str, strong_weak: str) -> dict:
-        if "强" in strong_weak:
-            targets = ["财", "才", "官", "杀"]
-        else:
-            targets = ["印", "枭", "比", "劫"]
-        stars = self._find_stems(dm_stem, targets)
-        note = "身强宜财官抑身" if "强" in strong_weak else "身弱宜印比生扶"
-        return {"stems": stars, "note": note}
-
-    def _calc_avoid(self, dm_stem: str, strong_weak: str) -> dict:
-        if "强" in strong_weak:
-            targets = ["比", "劫", "印", "枭"]
-        else:
-            targets = ["财", "才", "官", "杀"]
-        stars = self._find_stems(dm_stem, targets)
-        note = "比劫过旺则争宜收敛" if "强" in strong_weak else "财官过重则压身"
-        return {"stems": stars, "note": note}
-
-    def _find_stems(self, dm_stem: str, targets: list[str]) -> list[str]:
-        table = GOD_TABLE.get(dm_stem, {})
-        return [stem for stem, god in table.items() if stem != dm_stem and god in targets]
-
-    def _hidden_stems(self, pillars: dict) -> dict:
-        BRANCH_HIDDEN = {
-            "子": ["癸"], "丑": ["己", "癸", "辛"], "寅": ["甲", "丙", "戊"],
-            "卯": ["乙"], "辰": ["戊", "乙", "癸"], "巳": ["丙", "戊", "庚"],
-            "午": ["丁", "己"], "未": ["己", "丁", "乙"], "申": ["庚", "壬", "戊"],
-            "酉": ["辛"], "戌": ["戊", "辛", "丁"], "亥": ["壬", "甲"]
-        }
-        return {key: BRANCH_HIDDEN.get(pillars[key][1], [pillars[key][1]]) for key in ["year", "month", "day", "hour"]}
-
-    def _month_correction(self, month_branch: str) -> str:
-        return {
-            "寅": "立春", "卯": "惊蛰", "辰": "清明", "巳": "立夏",
-            "午": "芒种", "未": "小暑", "申": "立秋", "酉": "白露",
-            "戌": "寒露", "亥": "立冬", "子": "大雪", "丑": "小寒"
-        }.get(month_branch, month_branch)
-
-    def _agent_params(self, dm_stem: str, dm_ele: str, strong_weak: str,
-                      useful: dict, avoid: dict) -> dict:
-        risk_map = {
-            "偏强": "高压下容易走极端，过度扩张后失控",
-            "身强": "刚毅果断但易刚愎自用，不听劝告",
-            "偏弱": "韧性好但犹豫，外部压力下容易放弃",
-            "身弱": "依赖心强但敏感，需要外部认可维持动力",
-            "中和": "适应力强但缺乏主心骨，容易随波逐流"
-        }
-        return {
-            "emotional_pattern": risk_map.get(strong_weak, "需结合具体局面判断"),
-            "useful_action": f"宜用{useful['stems']}引导方向",
-            "forbidden_action": f"忌用{avoid['stems']}硬推",
-            "growth_direction": self._growth_hint(dm_stem, strong_weak)
-        }
-
-    def _growth_hint(self, dm_stem: str, strong_weak: str) -> str:
-        hints = {
-            "偏强": "学习柔性和合作，补水、金属性短板",
-            "身强": "练格局感和战略眼光，不过刚",
-            "偏弱": "建立稳定能量源，补土、火属性基础",
-            "身弱": "培养内核和独立性，减少依赖外部评价",
-            "中和": "专注单点突破，避免分散精力"
-        }
-        return hints.get(strong_weak, "持续观察和修正")
