@@ -5,14 +5,16 @@ from .state_model import new_state
 from .engines.reality_parser import RealityParser
 from .engines.symbolic_engine import SymbolicEngine
 from .engines.simulation_adapter import LocalSimulationEngine
+from .engines.bazi_engine import BaziEngine
 
 class TianJiOrchestrator:
     def __init__(self) -> None:
         self.reality = RealityParser()
         self.symbolic = SymbolicEngine()
+        self.bazi = BaziEngine()
         self.sim = LocalSimulationEngine()
 
-    def run(self, question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None, rounds: int = 3) -> dict:
+    def run(self, question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None, rounds: int = 3, birth_datetime: str | None = None, gender: str | None = None) -> dict:
         parsed = self.reality.parse(question, domain, goal)
         state = new_state(question, parsed["domain"], goal, event_time, location)
         state.reality.facts = parsed["facts"]
@@ -25,7 +27,7 @@ class TianJiOrchestrator:
         state.symbolic.bagua = sym["bagua"]
         state.symbolic.wuxing = sym["wuxing"]
         state.symbolic.iching = sym["iching"]
-        state.symbolic.bazi = sym["bazi"]
+        state.symbolic.bazi = self.bazi.analyze(birth_datetime=birth_datetime, gender=gender, location=location)
         state.symbolic.qimen = sym["qimen"]
         d = state.to_dict()
         d["simulation"] = self.sim.run(d, rounds)

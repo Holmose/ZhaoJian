@@ -21,7 +21,15 @@ class TianJiReportGenerator:
         lines.append(f"- 八卦：{s['bagua']['main']}，关键词：{'、'.join(s['bagua']['keywords'])}")
         lines.append(f"- 五行：{s['wuxing']['main']}，动力：{'、'.join(s['wuxing']['keywords'])}；风险：{s['wuxing']['risk']}")
         lines.append(f"- 易经：{s['iching']['name']}，趋势：{s['iching']['trend']}；策略：{s['iching']['strategy']}")
-        lines.append(f"- 四柱：{s['bazi']['status']}，{s['bazi']['role']}")
+        if s['bazi'].get('status') == 'ok':
+            bazi = s['bazi']
+            lines.append(f"- 四柱：年柱{bazi['pillars']['year']}、月柱{bazi['pillars']['month']}、日柱{bazi['pillars']['day']}、时柱{bazi['pillars']['hour']}")
+            lines.append(f"  - 日主：{bazi['day_master']['stem']}{bazi['day_master']['element']}{bazi['day_master']['yin_yang']}")
+            lines.append(f"  - 五行比例：{bazi['five_element_balance']}")
+            lines.append(f"  - 人物倾向：{'；'.join(bazi['personality_bias'])}")
+            lines.append(f"  - 风险模式：{'；'.join(bazi['risk_pattern'])}")
+        else:
+            lines.append(f"- 四柱：{s['bazi']['status']}，{s['bazi']['role']}")
         lines.append(f"- 奇门：{s['qimen']['status']}，{s['qimen']['role']}")
         lines.append("")
         lines.append("## 4. 多 Agent 推演过程")

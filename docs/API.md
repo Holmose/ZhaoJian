@@ -40,6 +40,8 @@ Content-Type: application/json
   "goal": "判断项目路线",
   "event_time": "2026-05-26 02:00:00",
   "location": "Guangzhou, China",
+  "birth_datetime": "1998-06-15 14:30",
+  "gender": "male",
   "rounds": 3,
   "save_report": true,
   "out_dir": "reports/tianji"
@@ -53,8 +55,10 @@ Content-Type: application/json
 | `question` | string | yes | The raw question or event background to simulate. |
 | `domain` | string | no | `relationship`, `business`, `content`, `personal`, `strategy`, or `unknown`. Defaults to `unknown`. |
 | `goal` | string | no | User objective. |
-| `event_time` | string | no | Event/start time. V1 stores it; V2/V3 will use it for Bazi/Qimen. |
+| `event_time` | string | no | Event/start time. V1 stores it; V3 will use it for Qimen. |
 | `location` | string | no | Event location. V1 stores it; V3 Qimen will use it. |
+| `birth_datetime` | string | no | Birth datetime for V2 Bazi engine. Format: `YYYY-MM-DD HH:MM`. |
+| `gender` | string | no | Gender marker for future luck-cycle direction extensions. |
 | `rounds` | integer | no | Simulation rounds. V1 local adapter defaults to `3`. |
 | `save_report` | boolean | no | Whether to save Markdown/JSON report files. Defaults to `true`. |
 | `out_dir` | string | no | Output report directory. Defaults to `reports/tianji`. |

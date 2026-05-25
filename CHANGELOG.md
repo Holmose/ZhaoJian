@@ -2,6 +2,26 @@
 
 All notable changes to TianJi will be documented in this file.
 
+## [0.2.0] - 2026-05-26
+
+### Added
+
+- Added V2 Bazi Natal Pattern Engine.
+- Added `backend/app/tianji/engines/bazi_engine.py`.
+- Added Heavenly Stems and Earthly Branches data: `tiangan_dizhi.json`.
+- Added Ten Gods mapping data: `ten_gods.json`.
+- Added birth datetime support in CLI.
+- Added birth datetime and gender support in API.
+- Integrated Bazi output into TianJi Orchestrator.
+- Integrated Bazi result rendering into Markdown reports.
+- Updated API docs and roadmap for V2.
+
+### Notes
+
+- V2 uses approximate solar-calendar pillar calculation.
+- Month pillar is not yet corrected by solar terms.
+- Luck cycles, useful god, and strength analysis are planned for future versions.
+
 ## [0.1.0] - 2026-05-26
 
 ### Added

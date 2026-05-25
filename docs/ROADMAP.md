@@ -49,34 +49,43 @@ Status: in progress / initial prototype completed.
 
 ## V2: Bazi Natal Pattern Engine
 
+Status: initial implementation completed.
+
 ### Goals
 
 Turn Four Pillars / Bazi into a long-term personality and cycle model.
 
-### Planned modules
+### Implemented modules
 
 ```text
 backend/app/tianji/engines/bazi_engine.py
 backend/app/tianji/data/tiangan_dizhi.json
-backend/app/tianji/data/sixty_jiazi.json
 backend/app/tianji/data/ten_gods.json
-backend/app/tianji/data/bazi_rules.json
 ```
 
-### Capabilities
+### Current capabilities
 
-- Solar/lunar calendar support.
-- Year/month/day/hour pillars.
+- Birth datetime input: `YYYY-MM-DD HH:MM`.
+- Approximate year/month/day/hour pillars.
 - Day master.
-- Ten gods.
+- Visible stem ten gods.
 - Five-element balance.
-- Basic strength/weakness analysis.
-- Luck cycle placeholders.
-- Personality and risk pattern generation.
+- Dominant elements.
+- Personality bias.
+- Risk pattern.
+- Agent parameters.
+- CLI/API/report integration.
+
+### Limitations
+
+- Month pillar is not solar-term corrected yet.
+- Lunar calendar conversion is not implemented yet.
+- Luck cycles are not implemented yet.
+- Useful god and strength/weakness analysis are not implemented yet.
 
 ### Output role
 
-Bazi should provide long-cycle parameters for agents, not deterministic fate conclusions.
+Bazi provides long-cycle parameters for agents, not deterministic fate conclusions.
 
 ## V3: Qimen Situation Engine
 

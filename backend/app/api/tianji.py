@@ -18,9 +18,11 @@ def run_tianji():
     goal = data.get('goal', '')
     event_time = data.get('event_time')
     location = data.get('location')
+    birth_datetime = data.get('birth_datetime')
+    gender = data.get('gender')
     rounds = int(data.get('rounds', 3))
     save_report = bool(data.get('save_report', True))
-    state = TianJiOrchestrator().run(question, domain, goal, event_time, location, rounds)
+    state = TianJiOrchestrator().run(question, domain, goal, event_time, location, rounds, birth_datetime, gender)
     result = {"success": True, "state": state}
     if save_report:
         out_dir = Path(data.get('out_dir', 'reports/tianji'))
