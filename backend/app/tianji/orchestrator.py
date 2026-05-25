@@ -6,12 +6,14 @@ from .engines.reality_parser import RealityParser
 from .engines.symbolic_engine import SymbolicEngine
 from .engines.simulation_adapter import LocalSimulationEngine
 from .engines.bazi_engine import BaziEngine
+from .engines.qimen_engine import QimenEngine
 
 class TianJiOrchestrator:
     def __init__(self) -> None:
         self.reality = RealityParser()
         self.symbolic = SymbolicEngine()
         self.bazi = BaziEngine()
+        self.qimen = QimenEngine()
         self.sim = LocalSimulationEngine()
 
     def run(self, question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None, rounds: int = 3, birth_datetime: str | None = None, gender: str | None = None) -> dict:
@@ -28,7 +30,7 @@ class TianJiOrchestrator:
         state.symbolic.wuxing = sym["wuxing"]
         state.symbolic.iching = sym["iching"]
         state.symbolic.bazi = self.bazi.analyze(birth_datetime=birth_datetime, gender=gender, location=location)
-        state.symbolic.qimen = sym["qimen"]
+        state.symbolic.qimen = self.qimen.analyze(event_time=event_time, location=location, question=question, domain=state.query.domain)
         d = state.to_dict()
         d["simulation"] = self.sim.run(d, rounds)
         d["causal"] = self._causal(d)

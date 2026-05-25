@@ -25,14 +25,19 @@ class LocalSimulationEngine:
         bagua = state["symbolic"]["bagua"]["main"]
         gua_hint = state["symbolic"]["bagua"]["action_hint"]
         domain = state["query"]["domain"]
+        qimen = state["symbolic"].get("qimen", {})
+        qimen_line = ""
+        if qimen.get("status") == "ok":
+            qimen_line = f"奇门显示{qimen['bureau']['label']}，{qimen['door']['name']}主事，时机提示：{qimen['timing_hint']}。"
         sim_rounds = []
         sim_rounds.append({"round": 1, "theme": "事实校验", "summary": "现实信息仍是主约束；象数标签只辅助组织变量。"})
-        sim_rounds.append({"round": 2, "theme": "象数争论", "summary": f"主象为{bagua}，提示：{gua_hint}。反方提醒：不能把象意当必然结果。"})
+        sim_rounds.append({"round": 2, "theme": "象数争论", "summary": f"主象为{bagua}，提示：{gua_hint}。{qimen_line}反方提醒：不能把象意当必然结果。"})
         sim_rounds.append({"round": 3, "theme": "策略收敛", "summary": "采用三路径输出：顺势路径、受阻路径、反转路径，并设置观察信号。"})
         consensus = [
             "不要输出绝对预言，要输出条件概率与触发条件",
             "过去反推必须绑定事实节点，不能凭空补剧情",
-            f"当前主象{bagua}可以作为局势标签，但最终动作仍看现实反馈"
+            f"当前主象{bagua}可以作为局势标签，但最终动作仍看现实反馈",
+            qimen.get("action_hint", "奇门未提供事件时机参数") if qimen.get("status") == "ok" else "缺少事件时间，奇门只保留为待补模块"
         ]
         disagreements = [
             "象数派倾向强调趋势感，现实派要求补充更多证据",

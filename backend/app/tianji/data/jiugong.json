@@ -1,0 +1,11 @@
+{
+  "坎一宫": {"element": "水", "direction": "北", "keywords": ["风险", "隐情", "流动", "信息"]},
+  "坤二宫": {"element": "土", "direction": "西南", "keywords": ["承载", "资源", "群众", "稳定"]},
+  "震三宫": {"element": "木", "direction": "东", "keywords": ["启动", "冲击", "变化", "行动"]},
+  "巽四宫": {"element": "木", "direction": "东南", "keywords": ["传播", "渗透", "合作", "进入"]},
+  "中五宫": {"element": "土", "direction": "中", "keywords": ["核心", "枢纽", "阻滞", "承压"]},
+  "乾六宫": {"element": "金", "direction": "西北", "keywords": ["权力", "规则", "领导", "资源"]},
+  "兑七宫": {"element": "金", "direction": "西", "keywords": ["口舌", "交易", "社交", "说服"]},
+  "艮八宫": {"element": "土", "direction": "东北", "keywords": ["停止", "边界", "积累", "门槛"]},
+  "离九宫": {"element": "火", "direction": "南", "keywords": ["曝光", "表达", "认知", "声量"]}
+}

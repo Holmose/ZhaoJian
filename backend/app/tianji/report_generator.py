@@ -30,7 +30,15 @@ class TianJiReportGenerator:
             lines.append(f"  - 风险模式：{'；'.join(bazi['risk_pattern'])}")
         else:
             lines.append(f"- 四柱：{s['bazi']['status']}，{s['bazi']['role']}")
-        lines.append(f"- 奇门：{s['qimen']['status']}，{s['qimen']['role']}")
+        if s['qimen'].get('status') == 'ok':
+            qimen = s['qimen']
+            lines.append(f"- 奇门：{qimen['bureau']['label']}，主宫{qimen['main_palace']['name']}，主门{qimen['door']['name']}，主星{qimen['star']['name']}，主神{qimen['god']['name']}")
+            lines.append(f"  - 局势信号：{'；'.join(qimen['situation_signal'])}")
+            lines.append(f"  - 主客关系：{qimen['host_guest']['posture']}；{qimen['host_guest']['relation']}")
+            lines.append(f"  - 时机提示：{qimen['timing_hint']}")
+            lines.append(f"  - 风险提示：{'；'.join(qimen['risk_hint'])}")
+        else:
+            lines.append(f"- 奇门：{s['qimen']['status']}，{s['qimen']['role']}")
         lines.append("")
         lines.append("## 4. 多 Agent 推演过程")
         for r in state["simulation"]["rounds"]: lines.append(f"- 第{r['round']}轮｜{r['theme']}：{r['summary']}")

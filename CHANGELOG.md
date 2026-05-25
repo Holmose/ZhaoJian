@@ -2,6 +2,26 @@
 
 All notable changes to TianJi will be documented in this file.
 
+## [0.3.0] - 2026-05-26
+
+### Added
+
+- Added V3 Qimen Situation Engine.
+- Added `backend/app/tianji/engines/qimen_engine.py`.
+- Added Qimen semantic datasets:
+  - `jiugong.json`
+  - `bamen.json`
+  - `jiuxing.json`
+  - `bashen.json`
+- Integrated event-time based Qimen semantic situation analysis into Orchestrator.
+- Integrated Qimen layout rendering into Markdown reports.
+- Enhanced local simulation adapter with Qimen timing hints.
+
+### Notes
+
+- V3 uses semantic Qimen layout, not yet full traditional solar-term Qimen calculation.
+- Solar terms, Yin/Yang Dun precision, Ju number, heaven/earth plates, and useful god selection are planned for future versions.
+
 ## [0.2.0] - 2026-05-26
 
 ### Added

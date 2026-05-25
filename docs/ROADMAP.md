@@ -89,37 +89,47 @@ Bazi provides long-cycle parameters for agents, not deterministic fate conclusio
 
 ## V3: Qimen Situation Engine
 
+Status: initial semantic implementation completed.
+
 ### Goals
 
 Turn Qimen Dunjia into a concrete event situation and timing model.
 
-### Planned modules
+### Implemented modules
 
 ```text
 backend/app/tianji/engines/qimen_engine.py
-backend/app/tianji/data/qimen_symbols.json
 backend/app/tianji/data/jiugong.json
 backend/app/tianji/data/bamen.json
 backend/app/tianji/data/jiuxing.json
 backend/app/tianji/data/bashen.json
 ```
 
-### Capabilities
+### Current capabilities
 
 - Event time input.
 - Location input.
-- Yin/Yang Dun placeholder.
-- Nine palaces.
-- Eight doors.
-- Nine stars.
-- Eight gods.
-- Useful god selection.
-- Host/guest situation analysis.
-- Action timing hints.
+- Semantic Yin/Yang Dun and Ju label.
+- Nine palaces semantic mapping.
+- Eight doors action model.
+- Nine stars event-energy model.
+- Eight gods hidden-variable model.
+- Host/guest posture hint.
+- Timing hint.
+- Risk hint.
+- Action hint.
+- Report and simulation adapter integration.
+
+### Limitations
+
+- No precise solar-term Qimen calculation yet.
+- No heaven/earth plate layout yet.
+- No useful god selection yet.
+- No traditional full Sanqi-Liuyi arrangement yet.
 
 ### Output role
 
-Qimen should model current event situation and action timing, not replace real-world evidence.
+Qimen models current event situation and action timing, not deterministic prophecy.
 
 ## V4: Full Hermes / MiroFish Integration
 
