@@ -46,7 +46,7 @@ class TianJiReportGenerator:
                 vp = bazi['v3_precision']
                 lines.append(f"  - 用神：{'、'.join(vp['useful_god']['stems'])} ({vp['useful_god']['note']})")
                 lines.append(f"  - 忌神：{'、'.join(vp['forbidden_god']['stems'])} ({vp['forbidden_god']['note']})")
-                lines.append(f"  - 藏干：年{vp['hidden_stems']['year']}、月{vp['hidden_stems']['month']}、日{vp['hidden_stems']['day']}、时{vp['hidden_stems']['hour']}")
+                lines.append(f"  - 藏干：年{','.join(vp['hidden_stems']['年'])}、月{','.join(vp['hidden_stems']['月'])}、日{','.join(vp['hidden_stems']['日'])}、时{','.join(vp['hidden_stems']['时'])}")
                 lines.append(f"  - 月令：{vp['month_correction']}")
         else:
             lines.append(f"- 四柱：{s['bazi']['status']}，{s['bazi']['role']}")

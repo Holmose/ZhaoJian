@@ -1,0 +1,737 @@
+{
+  "report_id": "tianji_20260526_045027",
+  "timestamp": "2026-05-26T04:50:27",
+  "query": {
+    "question": "测试引擎修复：同事女生，聊天变慢",
+    "domain": "relationship",
+    "goal": "判断窗口与行动",
+    "event_time": "2026-05-26 10:00",
+    "location": null
+  },
+  "reality": {
+    "facts": [
+      "测试引擎修复：同事女生，聊天变慢"
+    ],
+    "timeline": [],
+    "people": [],
+    "known_variables": [
+      "目标变量",
+      "信息完整度变量",
+      "执行变量"
+    ],
+    "unknown_variables": [
+      "缺少明确时间节点，奇门/周期判断仅能做语义级参考"
+    ],
+    "constraints": [
+      "现实证据优先",
+      "象数只作建模语言",
+      "输出必须保留概率分支和盲区"
+    ]
+  },
+  "symbolic": {
+    "bagua": {
+      "main": "兑",
+      "element": "金",
+      "keywords": [
+        "愉悦",
+        "社交",
+        "口舌",
+        "交易",
+        "说服"
+      ],
+      "action_hint": "适合轻沟通和交换价值",
+      "scores": {
+        "兑": 6,
+        "巽": 2,
+        "乾": 1,
+        "坤": 1,
+        "震": 1,
+        "坎": 1,
+        "离": 1,
+        "艮": 1
+      }
+    },
+    "wuxing": {
+      "main": "金",
+      "keywords": [
+        "规则",
+        "切割",
+        "竞争",
+        "决断"
+      ],
+      "risk": "过硬过冷，关系断裂"
+    },
+    "iching": {
+      "status": "ok",
+      "primary_hexagram": {
+        "number": 31,
+        "gua": "咸",
+        "trend": "当前趋势围绕感应展开，关键在吸引与互动的平衡",
+        "strategy": "围绕感应小步验证",
+        "risk": "忽视吸引导致失衡",
+        "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。",
+        "name": "泽山咸"
+      },
+      "changing_lines": [
+        5
+      ],
+      "changed_hexagram": {
+        "number": 36,
+        "gua": "明夷",
+        "trend": "当前趋势围绕受伤展开，关键在隐藏光芒与低调的平衡",
+        "strategy": "围绕受伤小步验证",
+        "risk": "忽视隐藏光芒导致失衡",
+        "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。",
+        "name": "地火明夷"
+      },
+      "transition": "本卦泽山咸：当前趋势围绕感应展开，关键在吸引与互动的平衡；变爻[5]后趋向地火明夷：当前趋势围绕受伤展开，关键在隐藏光芒与低调的平衡。",
+      "stage_warning": [
+        "变化发生在后段，注意结果收口、名实匹配和过度消耗",
+        "本卦风险：忽视吸引导致失衡",
+        "变卦风险：忽视隐藏光芒导致失衡"
+      ],
+      "action_hint": "先按本卦策略：围绕感应小步验证；同时预留变卦方向：围绕受伤小步验证。",
+      "principle": "易经层用于趋势演化建模，必须受现实证据和多路径推演约束",
+      "v3_precision": {
+        "primary_detail": {
+          "number": 31,
+          "gua": "咸",
+          "trend": "当前趋势围绕感应展开，关键在吸引与互动的平衡",
+          "strategy": "围绕感应小步验证",
+          "risk": "忽视吸引导致失衡",
+          "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。"
+        },
+        "changed_detail": {
+          "number": 36,
+          "gua": "明夷",
+          "trend": "当前趋势围绕受伤展开，关键在隐藏光芒与低调的平衡",
+          "strategy": "围绕受伤小步验证",
+          "risk": "忽视隐藏光芒导致失衡",
+          "stage_hint": "初爻看起因，中爻看过程，上爻看结果；V4先做语义趋势，变爻细化留到V4.1。"
+        },
+        "错卦_cuo": {
+          "name": "水火既济",
+          "trend": "表面已成，内部未稳，后续需防反复",
+          "strategy": "守成复盘，补漏洞"
+        },
+        "互卦_nuclear": {
+          "name": "地天泰",
+          "trend": "当前趋势围绕通达展开，关键在上下相交与顺势的平衡"
+        },
+        "changing_line_detail": [
+          {
+            "position": "初爻",
+            "label": "少阴",
+            "symbol": "-- --",
+            "change": false
+          },
+          {
+            "position": "二爻",
+            "label": "少阳",
+            "symbol": "━━━",
+            "change": false
+          },
+          {
+            "position": "三爻",
+            "label": "少阴",
+            "symbol": "-- --",
+            "change": false
+          },
+          {
+            "position": "四爻",
+            "label": "少阳",
+            "symbol": "━━━",
+            "change": false
+          },
+          {
+            "position": "五爻",
+            "label": "少阴",
+            "symbol": "-- --",
+            "change": false
+          },
+          {
+            "position": "上爻",
+            "label": "少阳",
+            "symbol": "━━━",
+            "change": false
+          }
+        ],
+        "liu_qin": [
+          {
+            "position": "初",
+            "stem": "壬",
+            "stem_element": "水",
+            "relation": "官鬼"
+          },
+          {
+            "position": "二",
+            "stem": "辛",
+            "stem_element": "金",
+            "relation": "妻财"
+          },
+          {
+            "position": "三",
+            "stem": "壬",
+            "stem_element": "水",
+            "relation": "官鬼"
+          },
+          {
+            "position": "四",
+            "stem": "辛",
+            "stem_element": "金",
+            "relation": "妻财"
+          },
+          {
+            "position": "五",
+            "stem": "壬",
+            "stem_element": "水",
+            "relation": "官鬼"
+          },
+          {
+            "position": "六",
+            "stem": "辛",
+            "stem_element": "金",
+            "relation": "妻财"
+          }
+        ],
+        "stage_warning": [],
+        "transition": "本卦泽山咸趋势当前趋势围绕感应展开，关键在吸引与互动的平衡；变卦地火明夷趋势当前趋势围绕受伤展开，关键在隐藏光芒与低调的平衡",
+        "action_hint": "围绕感应小步验证；参照围绕受伤小步验证",
+        "agent_params": {
+          "hex_type": "泽山咸",
+          "transition_type": "本变交替",
+          "stage_focus": "开局布局",
+          "emotional_tone": "柔和内敛",
+          "action_keyword": "围绕感应小步验证",
+          "risk_keyword": "忽视隐藏光芒导致失衡"
+        },
+        "v4_needed": []
+      }
+    },
+    "bazi": {
+      "status": "ok",
+      "birth_datetime": "1998-06-15 14:30",
+      "gender": "male",
+      "location": null,
+      "pillars": {
+        "year": "戊寅",
+        "month": "戊午",
+        "day": "癸酉",
+        "hour": "辛申",
+        "_dt": "1998-06-15 14:30"
+      },
+      "day_master": {
+        "stem": "癸",
+        "element": "水",
+        "yin_yang": "阴"
+      },
+      "visible_ten_gods": {
+        "年": {
+          "branch": "寅",
+          "stem": "甲",
+          "ten_god": "劫财"
+        },
+        "月": {
+          "branch": "午",
+          "stem": "戊",
+          "ten_god": "正财"
+        },
+        "日": {
+          "branch": "酉",
+          "stem": "辛",
+          "ten_god": "偏印"
+        },
+        "时": {
+          "branch": "申",
+          "stem": "庚",
+          "ten_god": "正官"
+        }
+      },
+      "five_element_balance": {
+        "木": 0.1,
+        "火": 0.2,
+        "土": 0.3,
+        "金": 0.2,
+        "水": 0.2
+      },
+      "strong_weak": "中和",
+      "dominant_element": "土",
+      "personality_bias": [
+        "重信息与流动",
+        "对规则与压力敏感"
+      ],
+      "risk_pattern": [
+        "高压下容易走极端",
+        "过度扩张后失控"
+      ],
+      "agent_params": {
+        "emotional_pattern": "水主人在中和时缺乏主动",
+        "useful_action": "宜用印比生扶",
+        "forbidden_action": "忌再泄宜补印比",
+        "growth_direction": "学习木火土补水短板"
+      },
+      "month_correction": "芒种(午月)",
+      "v3_needed": [
+        "大运起运年龄",
+        "流年叠加",
+        "调候用神"
+      ],
+      "v3_precision": {
+        "useful_god": {
+          "stems": [
+            "庚",
+            "戊"
+          ],
+          "note": "身弱宜用印比生扶"
+        },
+        "forbidden_god": {
+          "stems": [
+            "癸"
+          ],
+          "note": "身弱忌再泄宜补印比"
+        },
+        "hidden_stems": {
+          "年": [
+            "甲",
+            "丙",
+            "戊"
+          ],
+          "月": [
+            "丁",
+            "己"
+          ],
+          "日": [
+            "辛"
+          ],
+          "时": [
+            "庚",
+            "壬",
+            "戊"
+          ]
+        },
+        "ten_gods_detail": {
+          "年": {
+            "branch": "寅",
+            "stem": "甲",
+            "ten_god": "劫财",
+            "ten_god_element": "木",
+            "canggan": [
+              "甲",
+              "丙",
+              "戊"
+            ]
+          },
+          "月": {
+            "branch": "午",
+            "stem": "戊",
+            "ten_god": "正财",
+            "ten_god_element": "土",
+            "canggan": [
+              "丁",
+              "己"
+            ]
+          },
+          "日": {
+            "branch": "酉",
+            "stem": "辛",
+            "ten_god": "偏印",
+            "ten_god_element": "金",
+            "canggan": [
+              "辛"
+            ]
+          },
+          "时": {
+            "branch": "申",
+            "stem": "庚",
+            "ten_god": "正官",
+            "ten_god_element": "金",
+            "canggan": [
+              "庚",
+              "壬",
+              "戊"
+            ]
+          }
+        },
+        "month_correction": "午",
+        "element_strength": {
+          "木": {
+            "count": 1,
+            "ratio": 0.25
+          },
+          "火": {
+            "count": 0,
+            "ratio": 0.0
+          },
+          "土": {
+            "count": 1,
+            "ratio": 0.25
+          },
+          "金": {
+            "count": 2,
+            "ratio": 0.5
+          },
+          "水": {
+            "count": 0,
+            "ratio": 0.0
+          }
+        },
+        "balance_analysis": {
+          "label": "身弱",
+          "dominant": "金",
+          "day_ratio": 0.0,
+          "wuxing_count": {
+            "木": 1,
+            "土": 1,
+            "金": 2
+          }
+        },
+        "agent_params": {
+          "emotional_pattern": "偏强则高压下易走极端，身弱则缺乏主动",
+          "useful_action": "宜用['庚', '戊']引导方向",
+          "forbidden_action": "忌用['癸']硬推",
+          "growth_direction": "学习木火短板",
+          "dominant_behavior": "主水性，倾向0项驱动"
+        },
+        "v4_needed": []
+      }
+    },
+    "qimen": {
+      "status": "ok",
+      "event_time": "2026-05-26 10:00",
+      "location": null,
+      "domain": "relationship",
+      "question": "测试引擎修复：同事女生，聊天变慢",
+      "bureau": {
+        "dun": "阳遁",
+        "ju_number": 4,
+        "label": "阳遁4局",
+        "stem_branch_hour": "甲戌"
+      },
+      "main_palace": {
+        "name": "坎一宫",
+        "element": "水",
+        "direction": "北",
+        "keywords": [
+          "风险",
+          "隐情",
+          "流动",
+          "信息"
+        ]
+      },
+      "door": {
+        "name": "开门",
+        "quality": "吉",
+        "keywords": [
+          "打开",
+          "机会",
+          "合作",
+          "执行"
+        ],
+        "action_hint": "适合谈合作、开新局、明确行动"
+      },
+      "star": {
+        "name": "天英",
+        "keywords": [
+          "声量",
+          "表现",
+          "火气",
+          "传播"
+        ],
+        "risk": "虚火、舆论和情绪过强"
+      },
+      "god": {
+        "name": "蛇"
+      },
+      "useful_god": {
+        "useful_palace": "坎一宫",
+        "useful_god": "蛇",
+        "useful_door": "开门",
+        "useful_star": "天英",
+        "reason": "默认参考离九宫局势"
+      },
+      "host_guest": {
+        "posture": "中性局势，适宜试探验证",
+        "relation": "需注意风险变量，防暗箭和欺骗"
+      },
+      "board": {
+        "坎一宫": {
+          "star": "天英",
+          "door": "开门",
+          "god": "蛇",
+          "stem": "甲",
+          "branch": "子"
+        },
+        "坤二宫": {
+          "star": "天芮",
+          "door": "休门",
+          "god": "阴",
+          "stem": "乙",
+          "branch": "丑"
+        },
+        "震三宫": {
+          "star": "天柱",
+          "door": "生门",
+          "god": "合",
+          "stem": "丙",
+          "branch": "寅"
+        },
+        "巽四宫": {
+          "star": "天心",
+          "door": "伤门",
+          "god": "虎",
+          "stem": "丁",
+          "branch": "卯"
+        },
+        "中五宫": {
+          "star": "天禽",
+          "door": "杜门",
+          "god": "武",
+          "stem": "戊",
+          "branch": "辰"
+        },
+        "乾六宫": {
+          "star": "天蓬",
+          "door": "杜门",
+          "god": "武",
+          "stem": "己",
+          "branch": "巳"
+        },
+        "兑七宫": {
+          "star": "天任",
+          "door": "景门",
+          "god": "地",
+          "stem": "庚",
+          "branch": "午"
+        },
+        "艮八宫": {
+          "star": "天冲",
+          "door": "死门",
+          "god": "天",
+          "stem": "辛",
+          "branch": "未"
+        },
+        "离九宫": {
+          "star": "天辅",
+          "door": "惊门",
+          "god": "符",
+          "stem": "壬",
+          "branch": "申"
+        }
+      },
+      "situation_signal": [
+        "主宫坎一宫：['风险', '隐情', '流动', '信息']",
+        "主门开门：['打开', '机会', '合作', '执行']",
+        "主星天英：['声量', '表现', '火气', '传播']",
+        "主神蛇：[]"
+      ],
+      "timing_hint": "时机偏开，主门开门为吉，默认参考离九宫局势，可小步推进并观察反馈",
+      "risk_hint": [
+        "适合谈合作、开新局、明确行动",
+        "虚火、舆论和情绪过强",
+        "需注意风险变量，防暗箭和欺骗"
+      ],
+      "action_hint": "适合谈合作、开新局、明确行动；；参考有用神：坎一宫开门蛇",
+      "v4_needed": [
+        "值符值使精确飞布",
+        "天地盘",
+        "马星",
+        "空亡"
+      ],
+      "v3_precision": {
+        "value_fu": {
+          "palace": "兑七宫",
+          "note": "时干甲所在宫"
+        },
+        "value_shi": {
+          "palace": "坤二宫",
+          "note": "时支戌对应宫"
+        },
+        "heaven_plate": {
+          "坎一宫": "丁",
+          "坤二宫": "戊",
+          "震三宫": "己",
+          "巽四宫": "庚",
+          "中五宫": "辛",
+          "乾六宫": "壬",
+          "兑七宫": "甲",
+          "艮八宫": "乙",
+          "离九宫": "丙"
+        },
+        "earth_plate": {
+          "坎一宫": "甲",
+          "坤二宫": "乙",
+          "震三宫": "丙",
+          "巽四宫": "丁",
+          "中五宫": "戊",
+          "乾六宫": "己",
+          "兑七宫": "庚",
+          "艮八宫": "辛",
+          "离九宫": "壬"
+        },
+        "horse_star": "无马星",
+        "empty_palaces": [
+          "巳",
+          "午"
+        ],
+        "san_chong": {
+          "冲岁": "辰",
+          "冲月": "戌",
+          "冲日": "申"
+        },
+        "agent_hint": "兑七宫值符主战略，坤二宫值使主落地；值符主主动方，值使主被动方；无马星；空亡['巳', '午']",
+        "v4_needed": []
+      }
+    }
+  },
+  "simulation": {
+    "agents": [
+      {
+        "name": "Reality Agent",
+        "role": "只看事实与证据"
+      },
+      {
+        "name": "Causal Agent",
+        "role": "寻找过去因果链"
+      },
+      {
+        "name": "Risk Agent",
+        "role": "专门放大风险与黑天鹅"
+      },
+      {
+        "name": "Strategy Agent",
+        "role": "把结论落到行动"
+      },
+      {
+        "name": "Bazi Agent",
+        "role": "人物长期结构，V2增强"
+      },
+      {
+        "name": "Qimen Agent",
+        "role": "事件时空局势，V3增强"
+      },
+      {
+        "name": "IChing Agent",
+        "role": "趋势演化与阶段"
+      },
+      {
+        "name": "Wuxing Agent",
+        "role": "动力平衡与生克"
+      },
+      {
+        "name": "Skeptic Agent",
+        "role": "反玄学校验，防止过度解释"
+      },
+      {
+        "name": "Synthesizer Agent",
+        "role": "收敛共识"
+      }
+    ],
+    "rounds": [
+      {
+        "round": 1,
+        "theme": "事实校验",
+        "summary": "现实信息仍是主约束；象数标签只辅助组织变量。"
+      },
+      {
+        "round": 2,
+        "theme": "象数争论",
+        "summary": "主象为兑，提示：适合轻沟通和交换价值。易经趋势为泽山咸转地火明夷，提示：先按本卦策略：围绕感应小步验证；同时预留变卦方向：围绕受伤小步验证。。奇门显示阳遁4局，开门主事，时机提示：时机偏开，主门开门为吉，默认参考离九宫局势，可小步推进并观察反馈。反方提醒：不能把象意当必然结果。"
+      },
+      {
+        "round": 3,
+        "theme": "策略收敛",
+        "summary": "采用三路径输出：顺势路径、受阻路径、反转路径，并设置观察信号。"
+      }
+    ],
+    "consensus": [
+      "不要输出绝对预言，要输出条件概率与触发条件",
+      "过去反推必须绑定事实节点，不能凭空补剧情",
+      "当前主象兑可以作为局势标签，但最终动作仍看现实反馈",
+      "先按本卦策略：围绕感应小步验证；同时预留变卦方向：围绕受伤小步验证。",
+      "适合谈合作、开新局、明确行动；；参考有用神：坎一宫开门蛇"
+    ],
+    "disagreements": [
+      "象数派倾向强调趋势感，现实派要求补充更多证据",
+      "风险派认为需要保留黑天鹅路径，策略派只允许一个当前主动作"
+    ]
+  },
+  "causal": {
+    "past_turning_points": [
+      "当前资料未提供明确时间线，需补充过去关键节点"
+    ],
+    "causal_chain": [
+      "输入事实 → 象数状态标签 → 多Agent争论 → 条件概率路径"
+    ],
+    "missed_signals": [
+      "缺少对方/环境连续反馈时，不判断为必然趋势"
+    ]
+  },
+  "future": {
+    "branches": [
+      {
+        "name": "A 顺势发展",
+        "probability": 0.45,
+        "trigger_conditions": [
+          "现实反馈持续增强",
+          "关键风险未触发",
+          "适合轻沟通和交换价值"
+        ],
+        "risks": [
+          "过早下定论"
+        ],
+        "outcome": "局势按当前方向推进"
+      },
+      {
+        "name": "B 中途受阻",
+        "probability": 0.35,
+        "trigger_conditions": [
+          "信息不足继续扩大",
+          "外部变量介入",
+          "执行动作过急或过慢"
+        ],
+        "risks": [
+          "误把短期信号当长期趋势"
+        ],
+        "outcome": "进入停滞、冷却或反复"
+      },
+      {
+        "name": "C 突发反转",
+        "probability": 0.2,
+        "trigger_conditions": [
+          "隐藏变量暴露",
+          "时间窗口变化",
+          "关键人物态度突变"
+        ],
+        "risks": [
+          "黑天鹅不可控"
+        ],
+        "outcome": "出现和主路径相反的结果"
+      }
+    ]
+  },
+  "strategy": {
+    "best_action": "适合轻沟通和交换价值",
+    "forbidden_actions": [
+      "把推演当绝对预言",
+      "在证据不足时做高风险承诺",
+      "跳过现实反馈只看象数"
+    ],
+    "watch_signals": [
+      "对方/市场/环境是否持续反馈",
+      "关键时间节点是否出现新变量",
+      "风险信号是否从隐性变显性"
+    ],
+    "change_conditions": [
+      "新增事实推翻当前假设",
+      "主路径连续两次不成立",
+      "黑天鹅变量出现"
+    ]
+  },
+  "confidence": {
+    "level": "中",
+    "blind_spots": [
+      "缺少明确时间节点，奇门/周期判断仅能做语义级参考"
+    ],
+    "principle": "现实证据 > 多Agent共识 > 象数解释"
+  }
+}
