@@ -1,7 +1,7 @@
 """Test RelationshipEngine V5"""
 import json, sys
 sys.path.insert(0, "backend/app")
-from tianji.engines.relationship_engine import RelationshipEngine
+from zhaojian.engines.relationship_engine import RelationshipEngine
 
 def test_basic():
     engine = RelationshipEngine()

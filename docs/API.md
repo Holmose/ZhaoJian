@@ -1,17 +1,17 @@
 # API Documentation
 
-## TianJi API
+## ZhaoJian API
 
 Base prefix:
 
 ```text
-/api/tianji
+/api/zhaojian
 ```
 
 ## Health Check
 
 ```http
-GET /api/tianji/health
+GET /api/zhaojian/health
 ```
 
 Response:
@@ -19,15 +19,15 @@ Response:
 ```json
 {
   "success": true,
-  "service": "TianJi",
+  "service": "ZhaoJian",
   "version": "0.4.0"
 }
 ```
 
-## Run TianJi Simulation
+## Run ZhaoJian Simulation
 
 ```http
-POST /api/tianji/run
+POST /api/zhaojian/run
 Content-Type: application/json
 ```
 
@@ -44,7 +44,7 @@ Content-Type: application/json
   "gender": "male",
   "rounds": 3,
   "save_report": true,
-  "out_dir": "reports/tianji"
+  "out_dir": "reports/zhaojian"
 }
 ```
 
@@ -61,7 +61,7 @@ Content-Type: application/json
 | `gender` | string | no | Gender marker for future luck-cycle direction extensions. |
 | `rounds` | integer | no | Simulation rounds. V1 local adapter defaults to `3`. |
 | `save_report` | boolean | no | Whether to save Markdown/JSON report files. Defaults to `true`. |
-| `out_dir` | string | no | Output report directory. Defaults to `reports/tianji`. |
+| `out_dir` | string | no | Output report directory. Defaults to `reports/zhaojian`. |
 
 ### Response
 
@@ -69,7 +69,7 @@ Content-Type: application/json
 {
   "success": true,
   "state": {
-    "report_id": "tianji_YYYYMMDD_HHMMSS",
+    "report_id": "zhaojian_YYYYMMDD_HHMMSS",
     "timestamp": "2026-05-26T02:00:00",
     "query": {},
     "reality": {},
@@ -81,8 +81,8 @@ Content-Type: application/json
     "confidence": {}
   },
   "files": {
-    "markdown": "reports/tianji/tianji_YYYYMMDD_HHMMSS.md",
-    "json": "reports/tianji/tianji_YYYYMMDD_HHMMSS.json"
+    "markdown": "reports/zhaojian/zhaojian_YYYYMMDD_HHMMSS.md",
+    "json": "reports/zhaojian/zhaojian_YYYYMMDD_HHMMSS.json"
   }
 }
 ```
@@ -156,5 +156,5 @@ Confidence and blind spots:
 
 ```bash
 cd backend
-PYTHONPATH=. python scripts/tianji_cli.py "你的问题" --domain strategy --goal "你的目标" --out reports/tianji
+PYTHONPATH=. python scripts/zhaojian_cli.py "你的问题" --domain strategy --goal "你的目标" --out reports/zhaojian
 ```

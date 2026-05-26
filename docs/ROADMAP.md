@@ -1,8 +1,8 @@
-# TianJi Roadmap
+# ZhaoJian Roadmap
 
 ## Vision
 
-TianJi aims to become an oriental philosophy enhanced multi-agent simulation system for:
+ZhaoJian aims to become an oriental philosophy enhanced multi-agent simulation system for:
 
 - causal reconstruction
 - future branching
@@ -18,34 +18,34 @@ Status: in progress / initial prototype completed.
 
 ### Goals
 
-- Rebuild from MiroFish codebase into TianJi project identity.
-- Add independent TianJi backend module.
+- Rebuild from MiroFish codebase into ZhaoJian project identity.
+- Add independent ZhaoJian backend module.
 - Build a semantic symbolic engine.
 - Generate structured reports.
 - Provide CLI and API entry points.
 
 ### Completed
 
-- `backend/app/tianji/state_model.py`
-- `backend/app/tianji/engines/reality_parser.py`
-- `backend/app/tianji/engines/symbolic_engine.py`
-- `backend/app/tianji/engines/simulation_adapter.py`
-- `backend/app/tianji/orchestrator.py`
-- `backend/app/tianji/report_generator.py`
-- `backend/scripts/tianji_cli.py`
-- `/api/tianji/run`
-- `/api/tianji/health`
-- `README_TIANJI.md`
-- `docs/TIANJI_ARCHITECTURE.md`
+- `backend/app/zhaojian/state_model.py`
+- `backend/app/zhaojian/engines/reality_parser.py`
+- `backend/app/zhaojian/engines/symbolic_engine.py`
+- `backend/app/zhaojian/engines/simulation_adapter.py`
+- `backend/app/zhaojian/orchestrator.py`
+- `backend/app/zhaojian/report_generator.py`
+- `backend/scripts/zhaojian_cli.py`
+- `/api/zhaojian/run`
+- `/api/zhaojian/health`
+- `README_ZHAOJIAN.md`
+- `docs/ZHAOJIAN_ARCHITECTURE.md`
 - `docs/API.md`
 
 ### Next tasks
 
-- Add frontend TianJi page.
+- Add frontend ZhaoJian page.
 - Add full 64 IChing hexagram semantic dataset.
 - Add unit tests.
 - Add sample reports.
-- Replace inherited MiroFish branding with TianJi branding where appropriate.
+- Replace inherited MiroFish branding with ZhaoJian branding where appropriate.
 
 ## V2: Bazi Natal Pattern Engine
 
@@ -58,9 +58,9 @@ Turn Four Pillars / Bazi into a long-term personality and cycle model.
 ### Implemented modules
 
 ```text
-backend/app/tianji/engines/bazi_engine.py
-backend/app/tianji/data/tiangan_dizhi.json
-backend/app/tianji/data/ten_gods.json
+backend/app/zhaojian/engines/bazi_engine.py
+backend/app/zhaojian/data/tiangan_dizhi.json
+backend/app/zhaojian/data/ten_gods.json
 ```
 
 ### Current capabilities
@@ -98,11 +98,11 @@ Turn Qimen Dunjia into a concrete event situation and timing model.
 ### Implemented modules
 
 ```text
-backend/app/tianji/engines/qimen_engine.py
-backend/app/tianji/data/jiugong.json
-backend/app/tianji/data/bamen.json
-backend/app/tianji/data/jiuxing.json
-backend/app/tianji/data/bashen.json
+backend/app/zhaojian/engines/qimen_engine.py
+backend/app/zhaojian/data/jiugong.json
+backend/app/zhaojian/data/bamen.json
+backend/app/zhaojian/data/jiuxing.json
+backend/app/zhaojian/data/bashen.json
 ```
 
 ### Current capabilities
@@ -142,8 +142,8 @@ Upgrade the trend layer from seed hexagrams to a full 64-hexagram transition mod
 ### Implemented modules
 
 ```text
-backend/app/tianji/engines/iching_engine.py
-backend/app/tianji/data/iching_64_hexagrams.json
+backend/app/zhaojian/engines/iching_engine.py
+backend/app/zhaojian/data/iching_64_hexagrams.json
 ```
 
 ### Current capabilities
@@ -170,7 +170,7 @@ Status: initial implementation completed.
 
 ### Goals
 
-Make TianJi easy to verify, demonstrate, and maintain.
+Make ZhaoJian easy to verify, demonstrate, and maintain.
 
 ### Implemented modules
 
@@ -213,13 +213,13 @@ LocalSimulationEngine
 HermesMiroFishSimulationEngine
 ```
 
-The TianJi state object remains stable. Only the simulation adapter changes.
+The ZhaoJian state object remains stable. Only the simulation adapter changes.
 
 ## V5: Retrospective Learning Loop
 
 ### Goals
 
-Make TianJi self-calibrating through outcome feedback.
+Make ZhaoJian self-calibrating through outcome feedback.
 
 ### Capabilities
 

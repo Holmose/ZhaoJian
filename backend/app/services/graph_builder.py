@@ -55,7 +55,7 @@ class GraphBuilderService:
         self,
         text: str,
         ontology: Dict[str, Any],
-        graph_name: str = "TianJi Graph",
+        graph_name: str = "ZhaoJian Graph",
         chunk_size: int = 500,
         chunk_overlap: int = 50,
         batch_size: int = 3
@@ -192,12 +192,12 @@ class GraphBuilderService:
     
     def create_graph(self, name: str) -> str:
         """创建Zep图谱（公开方法）"""
-        graph_id = f"tianji_{uuid.uuid4().hex[:16]}"
+        graph_id = f"zhaojian_{uuid.uuid4().hex[:16]}"
         
         self.client.graph.create(
             graph_id=graph_id,
             name=name,
-            description="TianJi Simulation Graph"
+            description="ZhaoJian Simulation Graph"
         )
         
         return graph_id

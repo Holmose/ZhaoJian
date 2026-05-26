@@ -1,4 +1,4 @@
-from app.tianji.engines.qimen_engine import QimenEngine
+from app.zhaojian.engines.qimen_engine import QimenEngine
 
 
 def test_qimen_engine_missing_event_time():

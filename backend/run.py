@@ -1,5 +1,5 @@
 """
-TianJi Backend 启动入口
+ZhaoJian Backend 启动入口
 """
 
 import os

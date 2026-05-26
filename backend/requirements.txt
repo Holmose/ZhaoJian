@@ -1,5 +1,5 @@
 # ===========================================
-# TianJi Backend Dependencies
+# ZhaoJian Backend Dependencies
 # ===========================================
 # Python 3.11+ required
 # Install: pip install -r requirements.txt

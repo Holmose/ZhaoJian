@@ -347,7 +347,8 @@ class InterpretationEngine:
             else:
                 tone = "中性局势，边聊边观察"
         else:
-            tone = qimen.get("summary", {}).get("core_signal", "")
+            qimen_summary = qimen.get("summary", {})
+            tone = qimen_summary.get("core_signal", "") if isinstance(qimen_summary, dict) else str(qimen_summary or "")
 
         return {
             "core_theme": core_theme,

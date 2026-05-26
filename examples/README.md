@@ -1,12 +1,12 @@
 # Examples
 
-This directory contains ready-to-run TianJi simulation inputs.
+This directory contains ready-to-run ZhaoJian simulation inputs.
 
 ## Run an example through CLI
 
 ```bash
 cd backend
-PYTHONPATH=. python scripts/tianji_cli.py \
+PYTHONPATH=. python scripts/zhaojian_cli.py \
   "这个天机推演系统还没完全成熟，未来适不适合继续扩张和公开发布？" \
   --domain strategy \
   --goal "判断项目发布与扩张路线" \
@@ -14,7 +14,7 @@ PYTHONPATH=. python scripts/tianji_cli.py \
   --location "Guangzhou" \
   --birth-datetime "1998-06-15 14:30" \
   --gender male \
-  --out reports/tianji
+  --out reports/zhaojian
 ```
 
 ## Generate sample reports

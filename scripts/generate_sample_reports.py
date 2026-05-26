@@ -7,16 +7,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 
-from app.tianji.orchestrator import TianJiOrchestrator
-from app.tianji.report_generator import TianJiReportGenerator
+from app.zhaojian.orchestrator import ZhaoJianOrchestrator
+from app.zhaojian.report_generator import ZhaoJianReportGenerator
 
 
 def main() -> None:
     examples_dir = ROOT / "examples"
     out_dir = ROOT / "sample_reports"
     out_dir.mkdir(exist_ok=True)
-    orch = TianJiOrchestrator()
-    gen = TianJiReportGenerator()
+    orch = ZhaoJianOrchestrator()
+    gen = ZhaoJianReportGenerator()
     for path in sorted(examples_dir.glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         state = orch.run(

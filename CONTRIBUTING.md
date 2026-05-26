@@ -1,16 +1,16 @@
-# Contributing to TianJi
+# Contributing to ZhaoJian
 
-Thank you for your interest in TianJi.
+Thank you for your interest in ZhaoJian.
 
-TianJi is an oriental philosophy enhanced multi-agent simulation system. Contributions should respect the project's core principle:
+ZhaoJian is an oriental philosophy enhanced multi-agent simulation system. Contributions should respect the project's core principle:
 
 > Reality first, symbolic systems second, multi-path reasoning always.
 
 ## Development Setup
 
 ```bash
-git clone https://github.com/Holmose/TianJi.git
-cd TianJi
+git clone https://github.com/Holmose/ZhaoJian.git
+cd ZhaoJian
 npm run setup
 ```
 
@@ -28,11 +28,11 @@ cd backend
 uv run python run.py
 ```
 
-Run TianJi CLI:
+Run ZhaoJian CLI:
 
 ```bash
 cd backend
-PYTHONPATH=. python scripts/tianji_cli.py "你的问题" --domain strategy --goal "你的目标" --out reports/tianji
+PYTHONPATH=. python scripts/zhaojian_cli.py "你的问题" --domain strategy --goal "你的目标" --out reports/zhaojian
 ```
 
 ## Contribution Areas
@@ -58,13 +58,13 @@ PYTHONPATH=. python scripts/tianji_cli.py "你的问题" --domain strategy --goa
 ### 3. Multi-Agent Integration
 
 - Replace local adapter with full Hermes/MiroFish simulation.
-- Add TianJi-specific agent profiles.
+- Add ZhaoJian-specific agent profiles.
 - Add Skeptic Agent and Synthesizer Agent prompts.
 - Add report agent improvements.
 
 ### 4. Frontend
 
-- TianJi simulation page.
+- ZhaoJian simulation page.
 - Report viewer.
 - Symbolic state visualization.
 - Future branch graph.
@@ -79,7 +79,7 @@ PYTHONPATH=. python scripts/tianji_cli.py "你的问题" --domain strategy --goa
 
 ## Pull Request Rules
 
-1. Keep TianJi output probabilistic and evidence-aware.
+1. Keep ZhaoJian output probabilistic and evidence-aware.
 2. Do not introduce deterministic fortune-telling claims.
 3. Add documentation for new engines or data formats.
 4. Keep output JSON backward compatible when possible.
@@ -95,7 +95,7 @@ PYTHONPATH=. python scripts/tianji_cli.py "你的问题" --domain strategy --goa
 
 ## Safety Boundaries
 
-TianJi may assist with strategic analysis, but it must not replace professional advice in:
+ZhaoJian may assist with strategic analysis, but it must not replace professional advice in:
 
 - medical decisions
 - legal decisions
@@ -104,4 +104,4 @@ TianJi may assist with strategic analysis, but it must not replace professional 
 
 ## License
 
-TianJi is currently based on MiroFish codebase and follows AGPL-3.0. See `LICENSE` and `NOTICE.md`.
+ZhaoJian is currently based on MiroFish codebase and follows AGPL-3.0. See `LICENSE` and `NOTICE.md`.

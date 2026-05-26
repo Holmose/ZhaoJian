@@ -1,11 +1,11 @@
 # Sample Reports
 
-This directory contains generated TianJi reports from `examples/*.json`.
+This directory contains generated ZhaoJian reports from `examples/*.json`.
 
 Each example has two outputs:
 
-- Markdown report: human-readable TianJi analysis.
-- JSON report: structured `TianJiState` output for API/testing integration.
+- Markdown report: human-readable ZhaoJian analysis.
+- JSON report: structured `ZhaoJianState` output for API/testing integration.
 
 ## Files
 

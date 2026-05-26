@@ -1,8 +1,8 @@
-from app.tianji.orchestrator import TianJiOrchestrator
+from app.zhaojian.orchestrator import ZhaoJianOrchestrator
 
 
 def test_orchestrator_full_v1_v4_chain():
-    state = TianJiOrchestrator().run(
+    state = ZhaoJianOrchestrator().run(
         question="测试天机系统完整链路，适不适合继续开源发布",
         domain="strategy",
         goal="完整链路测试",

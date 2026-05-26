@@ -2,11 +2,11 @@
   <div class="home-container">
     <!-- 顶部导航栏 -->
     <nav class="navbar">
-      <div class="nav-brand">天玑</div>
+      <div class="nav-brand">照见</div>
       <div class="nav-links">
-        <router-link to="/tianji" class="nav-link">天玑推演</router-link>
+        <router-link to="/zhaojian" class="nav-link">照见推演</router-link>
         <LanguageSwitcher />
-        <a href="https://github.com/Holmose/TianJi" target="_blank" class="github-link">
+        <a href="https://github.com/Holmose/ZhaoJian" target="_blank" class="github-link">
           {{ $t('nav.visitGithub') }} <span class="arrow">↗</span>
         </a>
       </div>
@@ -45,7 +45,7 @@
         <div class="hero-right">
           <!-- Logo 区域 -->
           <div class="logo-container">
-            <img src="../assets/logo/TianJi_logo_left.jpeg" alt="TianJi Logo" class="hero-logo" />
+            <img src="../assets/logo/ZhaoJian_logo_left.jpeg" alt="ZhaoJian Logo" class="hero-logo" />
           </div>
           
           <button class="scroll-down-btn" @click="scrollToBottom">

@@ -1,4 +1,4 @@
-# TianJi System Architecture V1
+# ZhaoJian System Architecture V1
 
 ## Mission
 
@@ -12,7 +12,7 @@ Build an oriental-philosophy-enhanced multi-agent simulation system for future b
 
 ## Core State Object
 
-`TianJiState` is the central data contract. All engines read/write this shape:
+`ZhaoJianState` is the central data contract. All engines read/write this shape:
 
 ```json
 {
@@ -41,24 +41,24 @@ Output: bagua, wuxing, V4 iching transition, V2 bazi natal pattern, V3 qimen sit
 
 ### Simulation Adapter
 
-Input: TianJiState dict.
+Input: ZhaoJianState dict.
 Output: agents, rounds, consensus, disagreements.
 
 V1 uses deterministic local adapter. V4 should replace it with Hermes/MiroFish full simulation manager.
 
 ### Report Generator
 
-Input: TianJiState dict.
+Input: ZhaoJianState dict.
 Output: Markdown + JSON.
 
 ## Integration Plan with Hermes/MiroFish
 
-1. Keep TianJi as independent extension module under `backend/app/tianji`.
-2. Add API endpoint `/api/tianji/run`.
-3. In endpoint, call `TianJiOrchestrator.run`.
+1. Keep ZhaoJian as independent extension module under `backend/app/zhaojian`.
+2. Add API endpoint `/api/zhaojian/run`.
+3. In endpoint, call `ZhaoJianOrchestrator.run`.
 4. Replace `LocalSimulationEngine` with real MiroFish simulation manager when full environment is available.
-5. Store TianJi report as project artifact.
-6. Add frontend page for TianJi runs.
+5. Store ZhaoJian report as project artifact.
+6. Add frontend page for ZhaoJian runs.
 
 ## Future Data Engines
 

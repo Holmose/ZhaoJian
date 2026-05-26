@@ -1,7 +1,7 @@
 <template>
-  <div class="tianji-container">
+  <div class="zhaojian-container">
     <div class="header">
-      <h1>天玑推演系统</h1>
+      <h1>照见推演系统</h1>
       <p class="subtitle">Oriental Philosophy Enhanced Multi-Agent Simulation</p>
     </div>
 
@@ -72,7 +72,7 @@
     <!-- 加载状态 -->
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
-      <p>天玑系统推演中，请稍候...</p>
+      <p>照见系统推演中，请稍候...</p>
     </div>
 
     <!-- 报告输出 -->
@@ -230,7 +230,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'TianJiView',
+  name: 'ZhaoJianView',
   data() {
     return {
       form: {
@@ -274,7 +274,7 @@ export default {
           rounds: 3,
           save_report: true
         }
-        const resp = await axios.post('/api/tianji/run', payload)
+        const resp = await axios.post('/api/zhaojian/run', payload)
         this.report = resp.data.data || resp.data
       } catch (err) {
         alert('推演失败：' + (err.response?.data?.message || err.message))
@@ -289,7 +289,7 @@ export default {
       }
       this.reviewLoading = true
       try {
-        await axios.post('/api/tianji-review/submit', {
+        await axios.post('/api/zhaojian-review/submit', {
           report_id: this.report.report_id,
           actual_outcome: this.review.actual_outcome,
           accuracy: this.review.accuracy,
@@ -314,7 +314,7 @@ export default {
 </script>
 
 <style scoped>
-.tianji-container { max-width: 900px; margin: 0 auto; padding: 24px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.zhaojian-container { max-width: 900px; margin: 0 auto; padding: 24px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
 .header { text-align: center; margin-bottom: 32px; border-bottom: 2px solid #1a1a2e; padding-bottom: 16px; }
 .header h1 { font-size: 28px; color: #1a1a2e; margin: 0 0 8px; }
 .subtitle { color: #666; font-size: 14px; margin: 0; }

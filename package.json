@@ -1,7 +1,7 @@
 {
-  "name": "tianji-simulation-system",
+  "name": "zhaojian-simulation-system",
   "version": "0.4.0",
-  "description": "TianJi - 东方象数增强型多智能体推演系统",
+  "description": "ZhaoJian - 东方象数增强型多智能体推演系统",
   "scripts": {
     "setup": "npm install && cd frontend && npm install",
     "setup:backend": "cd backend && uv sync",
@@ -12,7 +12,7 @@
     "build": "cd frontend && npm run build",
     "test": "cd backend && PYTHONPATH=. python -m pytest ../tests",
     "samples": "python3 scripts/generate_sample_reports.py",
-    "tianji": "cd backend && PYTHONPATH=. python scripts/tianji_cli.py"
+    "zhaojian": "cd backend && PYTHONPATH=. python scripts/zhaojian_cli.py"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

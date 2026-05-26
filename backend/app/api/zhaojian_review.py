@@ -1,4 +1,4 @@
-"""TianJi review / feedback storage system."""
+"""ZhaoJian review / feedback storage system."""
 from __future__ import annotations
 
 import json
@@ -8,7 +8,7 @@ from pathlib import Path
 
 from flask import Blueprint, jsonify, request
 
-tianji_review_bp = Blueprint("tianji-review", __name__)
+zhaojian_review_bp = Blueprint("zhaojian-review", __name__)
 
 REVIEW_DIR = Path(__file__).resolve().parent.parent.parent.parent / "reports" / "reviews"
 REVIEW_DIR.mkdir(parents=True, exist_ok=True)
@@ -31,14 +31,14 @@ def _list_reviews(limit: int = 50) -> list[dict]:
     return reviews
 
 
-@tianji_review_bp.route("/reviews", methods=["GET"])
+@zhaojian_review_bp.route("/reviews", methods=["GET"])
 def list_reviews():
     """List recent reviews."""
     limit = int(request.args.get("limit", 50))
     return jsonify({"success": True, "reviews": _list_reviews(limit=limit)})
 
 
-@tianji_review_bp.route("/reviews/<report_id>", methods=["GET"])
+@zhaojian_review_bp.route("/reviews/<report_id>", methods=["GET"])
 def get_review(report_id: str):
     """Get a specific review."""
     p = _review_path(report_id)
@@ -48,7 +48,7 @@ def get_review(report_id: str):
         return jsonify({"success": True, "review": json.load(fh)})
 
 
-@tianji_review_bp.route("/reviews/<report_id>", methods=["POST"])
+@zhaojian_review_bp.route("/reviews/<report_id>", methods=["POST"])
 def save_review(report_id: str):
     """Save or update a review for a report."""
     data = request.get_json()
@@ -76,7 +76,7 @@ def save_review(report_id: str):
     return jsonify({"success": True, "review": review})
 
 
-@tianji_review_bp.route("/reviews/<report_id>", methods=["DELETE"])
+@zhaojian_review_bp.route("/reviews/<report_id>", methods=["DELETE"])
 def delete_review(report_id: str):
     """Delete a review."""
     p = _review_path(report_id)
@@ -86,7 +86,7 @@ def delete_review(report_id: str):
     return jsonify({"success": True, "deleted": report_id})
 
 
-@tianji_review_bp.route("/stats", methods=["GET"])
+@zhaojian_review_bp.route("/stats", methods=["GET"])
 def review_stats():
     """Get review statistics."""
     reviews = _list_reviews(limit=200)

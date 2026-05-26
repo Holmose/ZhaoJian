@@ -3,12 +3,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-class TianJiReportGenerator:
+class ZhaoJianReportGenerator:
     def render_markdown(self, state: dict) -> str:
         q = state["query"]
         s = state["symbolic"]
         lines = []
-        lines.append(f"# 天玑系统推演报告：{state['report_id']}")
+        lines.append(f"# 照见系统推演报告：{state['report_id']}")
         lines.append("")
         lines.append("## 1. 总断")
         lines.append(f"领域：{q['domain']}。当前主象为 **{s['bagua']['main']} / {s['wuxing']['main']}**，趋势卦参考 **{s['iching']['primary_hexagram']['name']} → {s['iching']['changed_hexagram']['name']}**。")
@@ -137,11 +137,11 @@ class TianJiReportGenerator:
         else:
             lines.append("（解读数据未生成）")
 
-        # ── 第10章：神性赋能与天玑判词 ─────────────────────────
+        # ── 第10章：神性赋能与照见判词 ─────────────────────────
         divine = state.get("divine", {})
         if divine:
             lines.append("")
-            lines.append("## 10. 天玑判词 · 神性赋能")
+            lines.append("## 10. 照见判词 · 神性赋能")
             lines.append("")
             # 天机
             timing = divine.get("timing", {})
@@ -161,9 +161,9 @@ class TianJiReportGenerator:
             lines.append(f"*{verse.get('useful_god_sigil', '')}*")
             lines.append(f"*{verse.get('forbidden_god_sigil', '')}*")
             lines.append("")
-            # 天玑判词
+            # 照见判词
             judgment = divine.get("divine_judgment", {})
-            lines.append("### 天玑判词")
+            lines.append("### 照见判词")
             lines.append(f"**{judgment.get('overall_judgment', '')}**")
             lines.append(f"- 奇门：{judgment.get('qimen_judgment', '')}")
             lines.append(f"- 易经：{judgment.get('iching_judgment', '')}")
@@ -194,12 +194,12 @@ class TianJiReportGenerator:
                 lines.append(f"**{golden.get('golden_sentence', '')}**")
                 lines.append(f"- 修：{golden.get('advice', '')}")
                 lines.append(f"- 戒：{golden.get('warning', '')}")
-                lines.append(f"- 天玑：{golden.get('tianji_motto', '')}")
+                lines.append(f"- 照见：{golden.get('zhaojian_motto', '')}")
                 lines.append("")
-            # 天玑护符
+            # 照见护符
             talisman = divine.get("talisman", {})
             if talisman:
-                lines.append("### 天玑护符")
+                lines.append("### 照见护符")
                 lines.append(f"**{talisman.get('talisman_text', '')}**")
                 lines.append(f"- 符印：{talisman.get('talisman_id', '')}")
                 lines.append(f"- 天机：{talisman.get('celestial_elements', '')}")

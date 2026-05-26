@@ -1,4 +1,4 @@
-# TianJi 天玑系统
+# ZhaoJian 照见系统
 
 **东方象数推演引擎**
 
@@ -25,13 +25,13 @@ cd backend
 pip install -r requirements.txt
 
 # 命令行
-PYTHONPATH=. python scripts/tianji_cli.py \
+PYTHONPATH=. python scripts/zhaojian_cli.py \
   "我想追这个女生，后续怎么推进？" \
   --domain relationship \
   --birth-datetime "1998-06-15 14:30"
 
 # API
-curl -X POST http://localhost:5000/api/tianji/run \
+curl -X POST http://localhost:5000/api/zhaojian/run \
   -H "Content-Type: application/json" \
   -d '{
     "question": "这个项目适不适合发布？",

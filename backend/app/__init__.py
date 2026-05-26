@@ -1,5 +1,5 @@
 """
-TianJi Backend - Flask应用工厂
+ZhaoJian Backend - Flask应用工厂
 """
 
 import os
@@ -27,7 +27,7 @@ def create_app(config_class=Config):
         app.json.ensure_ascii = False
     
     # 设置日志
-    logger = setup_logger('tianji')
+    logger = setup_logger('zhaojian')
     
     # 只在 reloader 子进程中打印启动信息（避免 debug 模式下打印两次）
     is_reloader_process = os.environ.get('WERKZEUG_RUN_MAIN') == 'true'
@@ -36,7 +36,7 @@ def create_app(config_class=Config):
     
     if should_log_startup:
         logger.info("=" * 50)
-        logger.info("TianJi Backend 启动中...")
+        logger.info("ZhaoJian Backend 启动中...")
         logger.info("=" * 50)
     
     # 启用CORS
@@ -51,33 +51,33 @@ def create_app(config_class=Config):
     # 请求日志中间件
     @app.before_request
     def log_request():
-        logger = get_logger('tianji.request')
+        logger = get_logger('zhaojian.request')
         logger.debug(f"请求: {request.method} {request.path}")
         if request.content_type and 'json' in request.content_type:
             logger.debug(f"请求体: {request.get_json(silent=True)}")
     
     @app.after_request
     def log_response(response):
-        logger = get_logger('tianji.request')
+        logger = get_logger('zhaojian.request')
         logger.debug(f"响应: {response.status_code}")
         return response
     
     # 注册蓝图
-    from .api import graph_bp, simulation_bp, report_bp, tianji_bp
-    from .api.tianji_review import tianji_review_bp
+    from .api import graph_bp, simulation_bp, report_bp, zhaojian_bp
+    from .api.zhaojian_review import zhaojian_review_bp
     app.register_blueprint(graph_bp, url_prefix='/api/graph')
     app.register_blueprint(simulation_bp, url_prefix='/api/simulation')
     app.register_blueprint(report_bp, url_prefix='/api/report')
-    app.register_blueprint(tianji_bp, url_prefix='/api/tianji')
-    app.register_blueprint(tianji_review_bp, url_prefix='/api/tianji-review')
+    app.register_blueprint(zhaojian_bp, url_prefix='/api/zhaojian')
+    app.register_blueprint(zhaojian_review_bp, url_prefix='/api/zhaojian-review')
     
     # 健康检查
     @app.route('/health')
     def health():
-        return {'status': 'ok', 'service': 'TianJi Backend'}
+        return {'status': 'ok', 'service': 'ZhaoJian Backend'}
     
     if should_log_startup:
-        logger.info("TianJi Backend 启动完成")
+        logger.info("ZhaoJian Backend 启动完成")
     
     return app
 

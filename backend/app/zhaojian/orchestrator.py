@@ -14,7 +14,7 @@ from .engines.iching_precision import IChingPrecisionEngine
 from .engines.interpretation_engine import InterpretationEngine
 from .engines.divine_engine import DivineEngine
 
-class TianJiOrchestrator:
+class ZhaoJianOrchestrator:
     def __init__(self) -> None:
         self.reality = RealityParser()
         self.symbolic = SymbolicEngine()

@@ -1,4 +1,4 @@
-from app.tianji.engines.bazi_engine import BaziEngine
+from app.zhaojian.engines.bazi_engine import BaziEngine
 
 
 def test_bazi_engine_missing_birth_datetime():

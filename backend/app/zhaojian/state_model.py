@@ -7,7 +7,7 @@ from datetime import datetime
 DOMAINS = ["relationship", "business", "content", "personal", "strategy", "unknown"]
 
 @dataclass
-class TianJiQuery:
+class ZhaoJianQuery:
     question: str
     domain: str = "unknown"
     goal: str = ""
@@ -47,10 +47,10 @@ class FutureBranch:
     outcome: str
 
 @dataclass
-class TianJiState:
+class ZhaoJianState:
     report_id: str
     timestamp: str
-    query: TianJiQuery
+    query: ZhaoJianQuery
     reality: RealityModel = field(default_factory=RealityModel)
     symbolic: SymbolicModel = field(default_factory=SymbolicModel)
     simulation: SimulationModel = field(default_factory=SimulationModel)
@@ -63,7 +63,7 @@ class TianJiState:
         return asdict(self)
 
 
-def new_state(question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None) -> TianJiState:
+def new_state(question: str, domain: str = "unknown", goal: str = "", event_time: str | None = None, location: str | None = None) -> ZhaoJianState:
     ts = datetime.now().isoformat(timespec="seconds")
-    rid = "tianji_" + datetime.now().strftime("%Y%m%d_%H%M%S")
-    return TianJiState(report_id=rid, timestamp=ts, query=TianJiQuery(question=question, domain=domain, goal=goal, event_time=event_time, location=location))
+    rid = "zhaojian_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+    return ZhaoJianState(report_id=rid, timestamp=ts, query=ZhaoJianQuery(question=question, domain=domain, goal=goal, event_time=event_time, location=location))

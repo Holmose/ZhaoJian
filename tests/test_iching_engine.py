@@ -1,4 +1,4 @@
-from app.tianji.engines.iching_engine import IChingEngine
+from app.zhaojian.engines.iching_engine import IChingEngine
 
 
 def test_iching_engine_returns_transition():

@@ -5,7 +5,7 @@ import SimulationView from '../views/SimulationView.vue'
 import SimulationRunView from '../views/SimulationRunView.vue'
 import ReportView from '../views/ReportView.vue'
 import InteractionView from '../views/InteractionView.vue'
-import TianJiView from '../views/TianJiView.vue'
+import ZhaoJianView from '../views/ZhaoJianView.vue'
 
 const routes = [
   {
@@ -44,9 +44,9 @@ const routes = [
     props: true
   },
   {
-    path: '/tianji',
-    name: 'TianJi',
-    component: TianJiView
+    path: '/zhaojian',
+    name: 'ZhaoJian',
+    component: ZhaoJianView
   }
 ]
 

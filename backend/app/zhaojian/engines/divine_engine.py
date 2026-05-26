@@ -1,4 +1,4 @@
-"""Divine Engine: 天玑神性赋能层
+"""Divine Engine: 照见神性赋能层
 
 为推演结果注入东方神性赋能与仪式感。
 不是玄学包装，而是将象数宇宙观美学化呈现。
@@ -6,7 +6,7 @@
 神性三层：
 L1 天机：解读这一刻天时、地利、人和的宇宙同频信号
 L2 命盘铭文：将四柱写成有力量感的命盘诗句
-L3 天玑判词：将奇门+易经结论升华为一句话判词
+L3 照见判词：将奇门+易经结论升华为一句话判词
 """
 
 from __future__ import annotations
@@ -118,7 +118,7 @@ def _load_data(name: str) -> dict:
 
 
 class DivineEngine:
-    """天玑神性赋能引擎"""
+    """照见神性赋能引擎"""
 
     def __init__(self) -> None:
         self.tiangan_dizhi = _load_data("tiangan_dizhi")
@@ -284,7 +284,7 @@ class DivineEngine:
         }.get(tg, tg)
         return s
 
-    # ── L3 天玑判词：奇门+易经升华为判词 ────────────────────────
+    # ── L3 照见判词：奇门+易经升华为判词 ────────────────────────
 
     def _divine_judgment(self, qimen: dict, iching: dict) -> dict:
         """将奇门+易经结论升华为一句话判词"""
@@ -445,7 +445,7 @@ class DivineEngine:
             "golden_sentence": word,
             "advice": advice,
             "warning": warning,
-            "tianji_motto": "天玑一动，破晓黎明；象数同参，命自我立"
+            "zhaojian_motto": "照见一动，破晓黎明；象数同参，命自我立"
         }
 
     def _season_hint(self, elem: str) -> str:
@@ -458,7 +458,7 @@ class DivineEngine:
         return {"木":"金克","火":"水克","土":"木克","金":"火克","水":"土克"}.get(elem, "金克")
 
     def _talisman(self, bazi: dict, qimen: dict, iching: dict) -> dict:
-        """天玑护符：命盘的最浓缩符号"""
+        """照见护符：命盘的最浓缩符号"""
         dm_stem = bazi.get("day_master", {}).get("stem", "")
         dm_elem = bazi.get("day_master", {}).get("element", "")
         label = bazi.get("v3_precision", {}).get("balance_analysis", {}).get("label", "")
@@ -500,4 +500,4 @@ class DivineEngine:
             "甲":"甲","乙":"乙","丙":"丙","丁":"丁","戊":"戊",
             "己":"己","庚":"庚","辛":"辛","壬":"壬","癸":"癸"
         }.get(dm, "癸")
-        return f"天玑符·{power}·{door[:1]}·{star[:1]}·{label[:1]} — 天机不可泄露"
+        return f"照见符·{power}·{door[:1]}·{star[:1]}·{label[:1]} — 天机不可泄露"
